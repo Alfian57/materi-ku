@@ -1,5 +1,8 @@
 # Stage 1: Build PHP dependencies
-FROM composer:2 AS composer-builder
+FROM php:8.4-cli-alpine AS composer-builder
+
+# Install Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # Set working directory
 WORKDIR /var/www

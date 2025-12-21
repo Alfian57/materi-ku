@@ -17,9 +17,24 @@ if [ ! -e /var/www/public/storage ]; then
   cd /var/www && php artisan storage:link
 fi
 
-# Run Laravel migrations
-echo "Running database migrations..."
-php artisan migrate --force
+# Database migrations - support for fresh migrate and seeder via env vars
+# Set RUN_MIGRATE_FRESH=true for migrate:fresh (destroys data)
+# Set RUN_SEEDER=true to run seeders after migration
+if [ "$RUN_MIGRATE_FRESH" = "true" ]; then
+  echo "WARNING: Running migrate:fresh - this will destroy all data!"
+  php artisan migrate:fresh --force
+  if [ "$RUN_SEEDER" = "true" ]; then
+    echo "Running database seeders..."
+    php artisan db:seed --force
+  fi
+else
+  echo "Running database migrations..."
+  php artisan migrate --force
+  if [ "$RUN_SEEDER" = "true" ]; then
+    echo "Running database seeders..."
+    php artisan db:seed --force
+  fi
+fi
 
 # Optimize Laravel application for production
 echo "Optimizing Laravel application..."
