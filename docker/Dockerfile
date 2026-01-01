@@ -23,7 +23,7 @@ RUN apk add --no-cache \
 COPY . /var/www
 
 # Install PHP dependencies
-RUN composer install --optimize-autoloader --no-interaction --no-progress
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress
 
 # Stage 2: Build assets
 FROM node:18-alpine AS node-builder
