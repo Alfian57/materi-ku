@@ -1,94 +1,50 @@
-@extends('dashboard.layouts.main')
-
-@push('styles')
-    <style>
-        .tile {
-            position: relative;
-            display: flex;
-            align-items: flex-end;
-            background-size: cover;
-            background-position: center;
-            border-radius: 15px;
-            padding: 20px;
-            height: 250px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .tile:hover {
-            transform: scale(1.05);
-        }
-
-        .tile-content {
-            background: rgba(0, 0, 0, 0.6);
-            padding: 15px;
-            border-radius: 10px;
-            width: 100%;
-        }
-
-        .tile-title {
-            font-weight: bold;
-        }
-
-        .tile-text {
-            font-size: 0.9rem;
-        }
-
-        .tile .btn-outline-light {
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .tile .btn-outline-light:hover {
-            background-color: white;
-            color: #007bff;
-        }
-
-        @media (max-width: 768px) {
-            .tile {
-                height: auto;
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-
-            .tile-content {
-                padding: 10px;
-            }
-
-            .tile-title {
-                font-size: 1.2rem;
-            }
-
-            .tile-text {
-                font-size: 0.8rem;
-            }
-        }
-    </style>
-@endpush
-
-
-@section('content')
-    <section class="section">
-        <div class="container py-5">
-            <h2 class="mb-3 text-primary text-center">Homeworks for {{ $course->title }}</h2>
-            <p class="text-muted text-center"><strong>Category:</strong> {{ $course->courseCategory->name }}</p>
-
-            <hr class="my-4">
-
-            <div class="row justify-content-center gy-4">
-                @foreach ($course->homeworks as $homework)
-                    <div class="col-md-6 col-lg-4">
-                        <div class="tile" style="background-image: url('{{ asset('storage/' . $course->thumbnail) }}')">
-                            <div class="tile-content">
-                                <h5 class="tile-title text-white">{{ $homework->title }}</h5>
-                                <p class="tile-text text-light">{!! Str::limit($homework->content, 100) !!}</p>
-                                <a href="{{ route('dashboard.student.course.form', [$course->slug, $homework->slug]) }}"
-                                    class="btn btn-outline-light btn-sm mt-3">Do Homework</a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+<x-layouts.dashboard :title="$title">
+    <div class="space-y-6">
+        <!-- Header -->
+        <div class="flex items-center gap-3">
+            <a href="{{ route('dashboard.student.course.learn', $course->slug) }}" class="btn btn-sm btn-ghost"><svg
+                    class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg></a>
+            <div>
+                <h2 class="text-lg font-bold">Homework</h2>
+                <p class="text-sm text-[rgb(var(--color-text-muted))]">{{ $course->title }}</p>
             </div>
         </div>
-    </section>
-@endsection
+
+        <!-- Homework List -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @forelse ($course->homeworks as $homework)
+                <div
+                    class="card group hover:shadow-lg hover:-translate-y-1 transition-all duration-300 p-0 overflow-hidden">
+                    <div class="relative h-32 overflow-hidden">
+                        <img src="{{ asset('storage/' . $course->thumbnail) }}" alt="{{ $course->title }}"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="font-bold mb-2">{{ $homework->title }}</h3>
+                        <p class="text-sm text-[rgb(var(--color-text-muted))] mb-4 line-clamp-2">
+                            {!! Str::limit(strip_tags($homework->content), 80) !!}</p>
+                        <a href="{{ route('dashboard.student.course.form', [$course->slug, $homework->slug]) }}"
+                            class="btn-primary w-full">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                            </svg>
+                            Do Homework
+                        </a>
+                    </div>
+                </div>
+            @empty
+                <div class="col-span-full card">
+                    <div class="empty-state">
+                        <p class="empty-state-title">No Homework</p>
+                        <p class="empty-state-description">There's no homework for this course yet.</p>
+                    </div>
+                </div>
+            @endforelse
+        </div>
+    </div>
+</x-layouts.dashboard>

@@ -12,7 +12,7 @@ class TeacherAssignmentController extends Controller
     public function index(Course $course, Homework $homework)
     {
         return view('dashboard.pages.assignment.index', [
-            'title' => 'Assignment Management',
+            'title' => 'Manajemen Pengumpulan',
             'course' => $course,
             'homework' => $homework,
             'assignments' => $homework->assignments()->with('student')->latest()->get(),
@@ -22,7 +22,7 @@ class TeacherAssignmentController extends Controller
     public function show(Course $course, Homework $homework, Assignment $assignment)
     {
         return view('dashboard.pages.assignment.show', [
-            'title' => 'Assignment Detail',
+            'title' => 'Detail Pengumpulan',
             'course' => $course,
             'homework' => $homework,
             'assignment' => $assignment,
@@ -47,7 +47,7 @@ class TeacherAssignmentController extends Controller
             ]);
         }
 
-        toast('Assignment updated successfully!', 'success');
+        toast('Nilai berhasil disimpan!', 'success');
 
         return redirect()->route('dashboard.assignments.index', [$course->slug, $homework->slug]);
     }

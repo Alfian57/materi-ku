@@ -14,7 +14,7 @@ class StudentCourseController extends Controller
     public function learn(Course $course)
     {
         return view('dashboard.pages.student-course.learn', [
-            'title' => 'Learn '.$course->title,
+            'title' => 'Belajar ' . $course->title,
             'course' => $course,
         ]);
     }
@@ -22,7 +22,7 @@ class StudentCourseController extends Controller
     public function homework(Course $course)
     {
         return view('dashboard.pages.student-course.homework', [
-            'title' => 'Homework',
+            'title' => 'Tugas',
             'course' => $course,
         ]);
     }
@@ -30,7 +30,7 @@ class StudentCourseController extends Controller
     public function form(Course $course, Homework $homework)
     {
         return view('dashboard.pages.student-course.assignment', [
-            'title' => 'Form '.$homework->course->title,
+            'title' => 'Kumpulkan Tugas ' . $homework->course->title,
             'course' => $course,
             'homework' => $homework,
         ]);
@@ -57,7 +57,7 @@ class StudentCourseController extends Controller
             'content' => $request->review,
         ]);
 
-        toast('Assignment submitted', 'success');
+        toast('Tugas berhasil dikumpulkan', 'success');
 
         return redirect()->route('dashboard.student.course.homework', $homework->course);
     }

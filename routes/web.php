@@ -15,10 +15,10 @@ use App\Http\Controllers\TeacherHomeworkController;
 use App\Http\Controllers\TeacherReviewController;
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', 'dashboard/login');
+Route::view('/', 'welcome');
 Route::redirect('login', 'dashboard/login')->name('login');
 
-Route::as('dashboard.')->prefix('dashboard')->group(function () {
+Route:: as('dashboard.')->prefix('dashboard')->group(function () {
 
     Route::middleware('guest')->group(function () {
         Route::get('login', [AuthController::class, 'login'])->name('login.index');

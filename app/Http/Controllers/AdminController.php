@@ -10,7 +10,7 @@ class AdminController extends Controller
     public function index()
     {
         return view('dashboard.pages.admin.index', [
-            'title' => 'Admin Management',
+            'title' => 'Manajemen Admin',
             'admins' => Admin::with('account')->latest()->get(),
         ]);
     }
@@ -18,7 +18,7 @@ class AdminController extends Controller
     public function create()
     {
         return view('dashboard.pages.admin.create', [
-            'title' => 'Create Admin',
+            'title' => 'Tambah Admin',
         ]);
     }
 
@@ -33,7 +33,7 @@ class AdminController extends Controller
         $admin = Admin::create($request->only('name'));
         $admin->account()->create($request->only('email', 'password'));
 
-        toast('Admin created successfully!', 'success');
+        toast('Admin berhasil ditambahkan!', 'success');
 
         return redirect()->route('dashboard.admins.index');
     }
@@ -50,7 +50,7 @@ class AdminController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:100|unique:accounts,email,'.$admin->account->id,
+            'email' => 'required|email|max:100|unique:accounts,email,' . $admin->account->id,
             'password' => 'nullable|min:8|confirmed',
         ]);
 
@@ -61,7 +61,7 @@ class AdminController extends Controller
             $admin->account->update(['password' => $request->input('password')]);
         }
 
-        toast('Admin updated successfully!', 'success');
+        toast('Admin berhasil diperbarui!', 'success');
 
         return redirect()->route('dashboard.admins.index');
     }
@@ -71,7 +71,7 @@ class AdminController extends Controller
         $admin->account->delete();
         $admin->delete();
 
-        toast('Admin deleted successfully!', 'success');
+        toast('Admin berhasil dihapus!', 'success');
 
         return redirect()->route('dashboard.admins.index');
     }

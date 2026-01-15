@@ -11,7 +11,7 @@ class TeacherReviewController extends Controller
     {
         $review->update(['status' => 'blocked']);
 
-        toast('Review has been blocked', 'success');
+        toast('Ulasan berhasil diblokir', 'success');
 
         return back();
     }
@@ -26,7 +26,7 @@ class TeacherReviewController extends Controller
             ->get();
 
         return view('dashboard.pages.reviews.blocked', [
-            'title' => 'Blocked Reviews',
+            'title' => 'Ulasan Diblokir',
             'reviews' => $reviews,
         ]);
     }
@@ -35,7 +35,7 @@ class TeacherReviewController extends Controller
     {
         $review->update(['status' => 'published']);
 
-        toast('Review has been unblocked', 'success');
+        toast('Ulasan berhasil dibuka kembali', 'success');
 
         return back();
     }

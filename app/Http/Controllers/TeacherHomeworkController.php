@@ -11,7 +11,7 @@ class TeacherHomeworkController extends Controller
     public function index(Course $course)
     {
         return view('dashboard.pages.homework.index', [
-            'title' => 'Homework Management',
+            'title' => 'Manajemen Tugas',
             'course' => $course,
             'homeworks' => $course->homeworks()->latest()->get(),
         ]);
@@ -20,7 +20,7 @@ class TeacherHomeworkController extends Controller
     public function create(Course $course)
     {
         return view('dashboard.pages.homework.create', [
-            'title' => 'Create Homework',
+            'title' => 'Tambah Tugas',
             'course' => $course,
         ]);
     }
@@ -34,7 +34,7 @@ class TeacherHomeworkController extends Controller
 
         $course->homeworks()->create($validatedData);
 
-        toast('Homework created successfully!', 'success');
+        toast('Tugas berhasil ditambahkan!', 'success');
 
         return redirect()->route('dashboard.homeworks.index', $course->slug);
     }
@@ -42,7 +42,7 @@ class TeacherHomeworkController extends Controller
     public function show(Course $course, Homework $homework)
     {
         return view('dashboard.pages.homework.show', [
-            'title' => 'Homework Detail',
+            'title' => 'Detail Tugas',
             'course' => $course,
             'homework' => $homework,
         ]);
@@ -51,7 +51,7 @@ class TeacherHomeworkController extends Controller
     public function edit(Course $course, Homework $homework)
     {
         return view('dashboard.pages.homework.edit', [
-            'title' => 'Edit Homework',
+            'title' => 'Edit Tugas',
             'course' => $course,
             'homework' => $homework,
         ]);
@@ -66,7 +66,7 @@ class TeacherHomeworkController extends Controller
 
         $homework->update($validatedData);
 
-        toast('Homework updated successfully!', 'success');
+        toast('Tugas berhasil diperbarui!', 'success');
 
         return redirect()->route('dashboard.homeworks.index', $course->slug);
     }
@@ -75,7 +75,7 @@ class TeacherHomeworkController extends Controller
     {
         $homework->delete();
 
-        toast('Homework deleted successfully!', 'success');
+        toast('Tugas berhasil dihapus!', 'success');
 
         return redirect()->route('dashboard.homeworks.index', $course->slug);
     }

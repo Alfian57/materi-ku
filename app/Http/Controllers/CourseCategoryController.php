@@ -10,7 +10,7 @@ class CourseCategoryController extends Controller
     public function index()
     {
         return view('dashboard.pages.course-category.index', [
-            'title' => 'Course Categories Management',
+            'title' => 'Manajemen Kategori Kursus',
             'courseCategories' => CourseCategory::latest()->get(),
         ]);
     }
@@ -18,7 +18,7 @@ class CourseCategoryController extends Controller
     public function create()
     {
         return view('dashboard.pages.course-category.create', [
-            'title' => 'Create Course Category',
+            'title' => 'Tambah Kategori Kursus',
         ]);
     }
 
@@ -30,7 +30,7 @@ class CourseCategoryController extends Controller
 
         CourseCategory::create($validatedData);
 
-        toast('Course category created successfully!', 'success');
+        toast('Kategori kursus berhasil ditambahkan!', 'success');
 
         return redirect()->route('dashboard.course-categories.index');
     }
@@ -38,7 +38,7 @@ class CourseCategoryController extends Controller
     public function edit(CourseCategory $courseCategory)
     {
         return view('dashboard.pages.course-category.edit', [
-            'title' => 'Edit Course Category',
+            'title' => 'Edit Kategori Kursus',
             'courseCategory' => $courseCategory,
         ]);
     }
@@ -51,7 +51,7 @@ class CourseCategoryController extends Controller
 
         $courseCategory->update($validatedData);
 
-        toast('Course category updated successfully!', 'success');
+        toast('Kategori kursus berhasil diperbarui!', 'success');
 
         return redirect()->route('dashboard.course-categories.index');
     }
@@ -60,7 +60,7 @@ class CourseCategoryController extends Controller
     {
         $courseCategory->delete();
 
-        toast('Course category deleted successfully!', 'success');
+        toast('Kategori kursus berhasil dihapus!', 'success');
 
         return redirect()->route('dashboard.course-categories.index');
     }

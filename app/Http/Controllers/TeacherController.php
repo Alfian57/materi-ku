@@ -10,7 +10,7 @@ class TeacherController extends Controller
     public function index()
     {
         return view('dashboard.pages.teacher.index', [
-            'title' => 'Teacher Management',
+            'title' => 'Manajemen Pengajar',
             'teachers' => Teacher::with('account')->latest()->get(),
         ]);
     }
@@ -18,7 +18,7 @@ class TeacherController extends Controller
     public function create()
     {
         return view('dashboard.pages.teacher.create', [
-            'title' => 'Create Teacher',
+            'title' => 'Tambah Pengajar',
         ]);
     }
 
@@ -35,7 +35,7 @@ class TeacherController extends Controller
         $teacher = Teacher::create($request->only('name', 'nip', 'address'));
         $teacher->account()->create($request->only('email', 'password'));
 
-        toast('Teacher created successfully!', 'success');
+        toast('Pengajar berhasil ditambahkan!', 'success');
 
         return redirect()->route('dashboard.teachers.index');
     }
@@ -43,7 +43,7 @@ class TeacherController extends Controller
     public function edit(Teacher $teacher)
     {
         return view('dashboard.pages.teacher.edit', [
-            'title' => 'Edit Teacher',
+            'title' => 'Edit Pengajar',
             'teacher' => $teacher,
         ]);
     }
@@ -52,9 +52,9 @@ class TeacherController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:100|unique:accounts,email,'.$teacher->account->id,
+            'email' => 'required|email|max:100|unique:accounts,email,' . $teacher->account->id,
             'password' => 'nullable|min:8|confirmed',
-            'nip' => 'required|string|size:18|unique:teachers,nip,'.$teacher->id,
+            'nip' => 'required|string|size:18|unique:teachers,nip,' . $teacher->id,
             'address' => 'required|string',
         ]);
 
@@ -65,7 +65,7 @@ class TeacherController extends Controller
             $teacher->account->update(['password' => $request->input('password')]);
         }
 
-        toast('Teacher updated successfully!', 'success');
+        toast('Pengajar berhasil diperbarui!', 'success');
 
         return redirect()->route('dashboard.teachers.index');
     }
@@ -75,7 +75,7 @@ class TeacherController extends Controller
         $teacher->account->delete();
         $teacher->delete();
 
-        toast('Teacher deleted successfully!', 'success');
+        toast('Pengajar berhasil dihapus!', 'success');
 
         return redirect()->route('dashboard.teachers.index');
     }

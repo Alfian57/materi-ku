@@ -1,58 +1,61 @@
-@extends('dashboard.layouts.main')
-
-@push('scripts')
-    <script src="/assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
-    <script src="/assets/static/js/pages/simple-datatables.js"></script>
-@endpush
-
-@push('styles')
-    <link rel="stylesheet" href="/assets/extensions/simple-datatables/style.css">
-@endpush
-
-@section('content')
-    <section class="section">
-        <div class="card">
-            <div class="card-body">
-                <table class="table table-striped" id="table1">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Status</th>
-                            <th>Point</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($assignments as $item)
-                            <tr>
-                                <td>{{ $item->student->name }}</td>
-                                <td>
-                                    @if ($item->status == 'submitted')
-                                        <span class="badge bg-warning">Submitted</span>
-                                    @elseif($item->status == 'graded')
-                                        <span class="badge bg-success">Graded</span>
-                                    @else
-                                        <span class="badge bg-secondary">Unknown</span>
-                                    @endif
-                                </td>
-                                <td>
-                                    @if (is_null($item->point))
-                                        <span class="badge bg-warning">Not Graded</span>
-                                    @else
-                                        {{ $item->point }} Point
-                                    @endif
-                                </td>
-                                <td>
-                                    <a href="{{ route('dashboard.assignments.show', [$course->slug, $homework->slug, $item->id]) }}"
-                                        class="btn btn-sm btn-primary {{ !is_null($item->point) ? 'disabled' : '' }}">Give
-                                        Grade</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+<x-layouts.dashboard :title="$title">
+    <div class="card">
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <a href="{{ route('dashboard.homeworks.index', $course->slug) }}"
+                    class="text-primary-500 hover:underline text-sm">← Back to Homework</a>
+                <p class="text-[rgb(var(--color-text-muted))] mt-1">Student submissions for: {{ $homework->title }}</p>
             </div>
         </div>
-
-    </section>
-@endsection
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Student</th>
+                        <th>Submission</th>
+                        <th>Score</th>
+                        <th class="text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($assignments as $item)
+                        <tr class="animate-fade-in">
+                            <td>
+                                <div class="flex items-center gap-3">
+                                    <div class="avatar avatar-sm">
+                                        <div
+                                            class="w-full h-full bg-gradient-teal flex items-center justify-center text-white text-xs font-semibold">
+                                            {{ strtoupper(substr($item->student->name, 0, 1)) }}</div>
+                                    </div><span class="font-medium">{{ $item->student->name }}</span>
+                                </div>
+                            </td>
+                            <td class="max-w-xs truncate text-[rgb(var(--color-text-muted))]">
+                                {{ Str::limit($item->content, 50) }}</td>
+                            <td>@if($item->score)<span
+                            class="badge {{ $item->score >= 70 ? 'badge-success' : 'badge-warning' }}">{{ $item->score }}/100</span>@else<span
+                                    class="badge badge-secondary">Pending</span>@endif</td>
+                            <td>
+                                <div class="flex justify-end"><a
+                                        href="{{ route('dashboard.assignments.show', [$course->slug, $homework->slug, $item->id]) }}"
+                                        class="btn btn-sm btn-ghost text-secondary-500">View & Grade</a></div>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4">
+                                <div class="empty-state py-8"><svg class="empty-state-icon" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                                    </svg>
+                                    <p class="empty-state-title">No Submissions Yet</p>
+                                    <p class="empty-state-description">Students haven't submitted their work yet.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+</x-layouts.dashboard>

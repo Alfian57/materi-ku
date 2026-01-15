@@ -2,56 +2,25 @@
 
 namespace Database\Seeders;
 
-use App\Models\Admin;
-use App\Models\Assignment;
-use App\Models\Student;
-use App\Models\Teacher;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\File;
 
 class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
+     *
+     * Usage:
+     * - Production: php artisan db:seed --class=ProductionSeeder
+     * - Development: php artisan db:seed --class=DevelopmentSeeder
+     * - Or use APP_ENV to determine automatically:
+     *   - php artisan db:seed (uses development if APP_ENV=local, production otherwise)
      */
     public function run(): void
     {
-        $path = [
-            storage_path('app/public/images/courses'),
-            storage_path('app/public/images/profile-pic'),
-            storage_path('app/public/assignments'),
-        ];
-
-        foreach ($path as $dir) {
-            if (!File::exists($dir)) {
-                File::makeDirectory($dir, 0755, true);
-            }
-            chmod($dir, 0755);
+        if (app()->environment('local', 'development', 'testing')) {
+            $this->call(DevelopmentSeeder::class);
+        } else {
+            $this->call(ProductionSeeder::class);
         }
-
-        foreach ($path as $dir) {
-            if (File::exists($dir)) {
-                foreach (File::files($dir) as $file) {
-                    File::delete($file);
-                }
-            }
-        }
-
-        $this->call([
-            AccountSeeder::class,
-            CourseCategorySeeder::class,
-        ]);
-
-        Teacher::factory(25)->create();
-        Student::factory(100)->create();
-        Admin::factory(5)->create();
-
-        $this->call([
-            CourseSeeder::class,
-            ReviewSeeder::class,
-        ]);
-
-        Assignment::factory(2500)->create();
     }
 }

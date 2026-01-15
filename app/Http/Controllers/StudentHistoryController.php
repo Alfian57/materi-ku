@@ -13,7 +13,7 @@ class StudentHistoryController extends Controller
         $user = Auth::user()->accountable;
 
         return view('dashboard.pages.review-history.index', [
-            'title' => 'Review Histories',
+            'title' => 'Riwayat Ulasan',
             'reviews' => Review::query()
                 ->where('student_id', $user->id)
                 ->with('course')
@@ -27,7 +27,7 @@ class StudentHistoryController extends Controller
         $user = Auth::user()->accountable;
 
         return view('dashboard.pages.assignment-history.index', [
-            'title' => 'Assignment Histories',
+            'title' => 'Riwayat Tugas',
             'assignments' => Assignment::query()
                 ->where('student_id', $user->id)
                 ->with('homework.course')

@@ -1,37 +1,50 @@
-@extends('dashboard.layouts.main')
-
-@push('scripts')
-    <script src="/assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
-    <script src="/assets/static/js/pages/simple-datatables.js"></script>
-@endpush
-
-@push('styles')
-    <link rel="stylesheet" href="/assets/extensions/simple-datatables/style.css">
-@endpush
-
-@section('content')
-    <section class="section">
-        <div class="card">
-            <div class="card-body">
-
-                <table class="table table-striped" id="table1">
-                    <thead>
-                        <tr>
-                            <th>Course Name</th>
-                            <th>Review</th>
+<x-layouts.dashboard :title="$title">
+    <div class="card">
+        <h2 class="font-bold mb-6 flex items-center gap-2">
+            <svg class="w-5 h-5 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+            </svg>
+            My Reviews
+        </h2>
+        <div class="table-container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>Review</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($reviews as $item)
+                        <tr class="animate-fade-in">
+                            <td><span class="font-medium">{{ $item->course->title }}</span></td>
+                            <td class="text-[rgb(var(--color-text-muted))] max-w-md">{{ $item->content }}</td>
+                            <td>
+                                @if($item->status === 'blocked')
+                                    <span class="badge badge-danger">Blocked</span>
+                                @else
+                                    <span class="badge badge-success">Published</span>
+                                @endif
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($reviews as $item)
-                            <tr>
-                                <td>{{ $item->course->title }}</td>
-                                <td>{{ $item->content }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                    @empty
+                        <tr>
+                            <td colspan="3">
+                                <div class="empty-state py-8"><svg class="empty-state-icon" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                                    </svg>
+                                    <p class="empty-state-title">No Reviews Yet</p>
+                                    <p class="empty-state-description">Submit homework to leave course reviews.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
-
-    </section>
-@endsection
+    </div>
+</x-layouts.dashboard>

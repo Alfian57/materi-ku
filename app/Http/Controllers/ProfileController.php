@@ -10,7 +10,7 @@ class ProfileController extends Controller
     public function index()
     {
         return view('dashboard.pages.profile.index', [
-            'title' => 'Profile',
+            'title' => 'Profil',
         ]);
     }
 
@@ -22,7 +22,7 @@ class ProfileController extends Controller
 
         $request->user()->update($request->only('email'));
 
-        toast('Profile updated successfully', 'success');
+        toast('Profil berhasil diperbarui', 'success');
 
         return back();
     }
@@ -39,7 +39,7 @@ class ProfileController extends Controller
             'profile_picture' => $profilePic,
         ]);
 
-        toast('Profile picture updated successfully', 'success');
+        toast('Foto profil berhasil diperbarui', 'success');
 
         return back();
     }
@@ -51,8 +51,8 @@ class ProfileController extends Controller
             'new_password' => 'required|confirmed|min:8',
         ]);
 
-        if (! Hash::check($request->current_password, $request->user()->password)) {
-            toast('Current password is incorrect', 'error');
+        if (!Hash::check($request->current_password, $request->user()->password)) {
+            toast('Kata sandi saat ini salah', 'error');
 
             return back();
         }
@@ -61,7 +61,7 @@ class ProfileController extends Controller
             'password' => $request->new_password,
         ]);
 
-        toast('Password updated successfully', 'success');
+        toast('Kata sandi berhasil diperbarui', 'success');
 
         return back();
     }

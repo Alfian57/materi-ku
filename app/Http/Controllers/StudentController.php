@@ -10,7 +10,7 @@ class StudentController extends Controller
     public function index()
     {
         return view('dashboard.pages.student.index', [
-            'title' => 'Student Management',
+            'title' => 'Manajemen Siswa',
             'students' => Student::with('account')->latest()->get(),
         ]);
     }
@@ -18,7 +18,7 @@ class StudentController extends Controller
     public function create()
     {
         return view('dashboard.pages.student.create', [
-            'title' => 'Create Student',
+            'title' => 'Tambah Siswa',
         ]);
     }
 
@@ -34,7 +34,7 @@ class StudentController extends Controller
         $student = Student::create($request->only('name', 'address', 'point'));
         $student->account()->create($request->only('email', 'password'));
 
-        toast('Student created successfully!', 'success');
+        toast('Siswa berhasil ditambahkan!', 'success');
 
         return redirect()->route('dashboard.students.index');
     }
@@ -42,7 +42,7 @@ class StudentController extends Controller
     public function edit(Student $student)
     {
         return view('dashboard.pages.student.edit', [
-            'title' => 'Edit Student',
+            'title' => 'Edit Siswa',
             'student' => $student,
         ]);
     }
@@ -51,7 +51,7 @@ class StudentController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:100|unique:accounts,email,'.$student->account->id,
+            'email' => 'required|email|max:100|unique:accounts,email,' . $student->account->id,
             'password' => 'nullable|min:8|confirmed',
             'address' => 'required|string',
         ]);
@@ -63,7 +63,7 @@ class StudentController extends Controller
             $student->account->update(['password' => $request->input('password')]);
         }
 
-        toast('Student updated successfully!', 'success');
+        toast('Siswa berhasil diperbarui!', 'success');
 
         return redirect()->route('dashboard.students.index');
     }
@@ -73,7 +73,7 @@ class StudentController extends Controller
         $student->account->delete();
         $student->delete();
 
-        toast('Student deleted successfully!', 'success');
+        toast('Siswa berhasil dihapus!', 'success');
 
         return redirect()->route('dashboard.students.index');
     }

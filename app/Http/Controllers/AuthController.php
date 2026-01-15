@@ -11,7 +11,7 @@ class AuthController extends Controller
     public function login()
     {
         return view('auth.pages.login', [
-            'title' => 'Login',
+            'title' => 'Masuk',
         ]);
     }
 
@@ -28,7 +28,7 @@ class AuthController extends Controller
             return redirect()->intended(route('dashboard.index'));
         }
 
-        toast('Invalid credentials!', 'error');
+        toast('Email atau kata sandi salah!', 'error');
 
         return back();
     }
@@ -36,7 +36,7 @@ class AuthController extends Controller
     public function register()
     {
         return view('auth.pages.register', [
-            'title' => 'Register',
+            'title' => 'Daftar',
         ]);
     }
 
@@ -52,7 +52,7 @@ class AuthController extends Controller
         $student = Student::create($request->only('name', 'address'));
         $student->account()->create($request->only('email', 'password'));
 
-        toast('Account created successfully!', 'success');
+        toast('Akun berhasil dibuat!', 'success');
 
         return redirect()->route('dashboard.login.index');
     }

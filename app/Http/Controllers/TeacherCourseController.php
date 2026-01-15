@@ -14,7 +14,7 @@ class TeacherCourseController extends Controller
     public function index()
     {
         return view('dashboard.pages.course.index', [
-            'title' => 'Courses Management',
+            'title' => 'Manajemen Kursus',
             'courses' => Course::query()
                 ->with('courseCategory')
                 ->where('teacher_id', Auth::user()->accountable->id)
@@ -26,7 +26,7 @@ class TeacherCourseController extends Controller
     public function create()
     {
         return view('dashboard.pages.course.create', [
-            'title' => 'Create Course',
+            'title' => 'Tambah Kursus',
             'courseCategories' => CourseCategory::latest()->get(),
         ]);
     }
@@ -47,7 +47,7 @@ class TeacherCourseController extends Controller
         ]);
         Course::create($validatedData);
 
-        toast('Course created successfully!', 'success');
+        toast('Kursus berhasil ditambahkan!', 'success');
 
         return redirect()->route('dashboard.courses.index');
     }
@@ -55,7 +55,7 @@ class TeacherCourseController extends Controller
     public function edit(Course $course)
     {
         return view('dashboard.pages.course.edit', [
-            'title' => 'Edit Course',
+            'title' => 'Edit Kursus',
             'courseCategories' => CourseCategory::latest()->get(),
             'teachers' => Teacher::latest()->get(),
             'course' => $course,
@@ -65,7 +65,7 @@ class TeacherCourseController extends Controller
     public function show(Course $course)
     {
         return view('dashboard.pages.course.show', [
-            'title' => 'Show Course',
+            'title' => 'Detail Kursus',
             'course' => $course->load('reviews.student'),
         ]);
     }
@@ -92,7 +92,7 @@ class TeacherCourseController extends Controller
 
         $course->update($validatedData);
 
-        toast('Course updated successfully!', 'success');
+        toast('Kursus berhasil diperbarui!', 'success');
 
         return redirect()->route('dashboard.courses.index');
     }
@@ -102,7 +102,7 @@ class TeacherCourseController extends Controller
         Storage::disk('public')->delete($course->thumbnail);
         $course->delete();
 
-        toast('Course deleted successfully!', 'success');
+        toast('Kursus berhasil dihapus!', 'success');
 
         return redirect()->route('dashboard.courses.index');
     }
