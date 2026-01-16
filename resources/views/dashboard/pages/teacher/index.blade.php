@@ -1,13 +1,13 @@
 <x-layouts.dashboard :title="$title">
     <div class="card">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-            <p class="text-[rgb(var(--color-text-muted))]">Manage all registered teachers</p>
+            <p class="text-[rgb(var(--color-text-muted))]">Kelola semua pengajar terdaftar</p>
             <a href="{{ route('dashboard.teachers.create') }}" class="btn-primary">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
-                Add Teacher
+                Tambah Pengajar
             </a>
         </div>
 
@@ -16,10 +16,10 @@
                 <thead>
                     <tr>
                         <th>NIP</th>
-                        <th>Teacher</th>
+                        <th>Pengajar</th>
                         <th>Email</th>
-                        <th>Address</th>
-                        <th class="text-right">Actions</th>
+                        <th>Alamat</th>
+                        <th class="text-right">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,7 +55,7 @@
                                     </a>
                                     <form action="{{ route('dashboard.teachers.destroy', $item->nip) }}" method="POST"
                                         class="inline" x-data
-                                        @submit.prevent="Swal.fire({title:'Delete Teacher?',text:'This action cannot be undone.',icon:'warning',showCancelButton:true,confirmButtonColor:'#f43f5e',confirmButtonText:'Yes, delete!'}).then((r)=>{if(r.isConfirmed)$el.submit()})">
+                                        @submit.prevent="Swal.fire({title:'Hapus Pengajar?',text:'Tindakan ini tidak dapat dibatalkan.',icon:'warning',showCancelButton:true,confirmButtonColor:'#f43f5e',confirmButtonText:'Ya, hapus!',cancelButtonText:'Batal'}).then((r)=>{if(r.isConfirmed)$el.submit()})">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
@@ -77,10 +77,10 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                     </svg>
-                                    <p class="empty-state-title">No Teachers Found</p>
-                                    <p class="empty-state-description">Get started by adding your first teacher.</p>
-                                    <a href="{{ route('dashboard.teachers.create') }}" class="btn-primary mt-4">Add
-                                        Teacher</a>
+                                    <p class="empty-state-title">Tidak Ada Pengajar Ditemukan</p>
+                                    <p class="empty-state-description">Mulai dengan menambahkan pengajar pertama Anda.</p>
+                                    <a href="{{ route('dashboard.teachers.create') }}" class="btn-primary mt-4">Tambah
+                                        Pengajar</a>
                                 </div>
                             </td>
                         </tr>

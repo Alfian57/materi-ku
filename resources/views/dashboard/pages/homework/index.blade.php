@@ -3,23 +3,23 @@
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
             <div>
                 <a href="{{ route('dashboard.courses.show', $course->slug) }}"
-                    class="text-primary-500 hover:underline text-sm">← Back to {{ $course->title }}</a>
-                <p class="text-[rgb(var(--color-text-muted))] mt-1">Manage homework for this course</p>
+                    class="text-primary-500 hover:underline text-sm">← Kembali ke {{ $course->title }}</a>
+                <p class="text-[rgb(var(--color-text-muted))] mt-1">Kelola tugas untuk kursus ini</p>
             </div>
             <a href="{{ route('dashboard.homeworks.create', $course->slug) }}" class="btn-primary">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
-                Add Homework
+                Tambah Tugas
             </a>
         </div>
         <div class="table-container">
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Homework Title</th>
-                        <th class="text-right">Actions</th>
+                        <th>Judul Tugas</th>
+                        <th class="text-right">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,7 +50,7 @@
                                         </svg></a>
                                     <form action="{{ route('dashboard.homeworks.destroy', [$course->slug, $item->slug]) }}"
                                         method="POST" class="inline" x-data
-                                        @submit.prevent="Swal.fire({title:'Delete Homework?',icon:'warning',showCancelButton:true,confirmButtonColor:'#f43f5e',confirmButtonText:'Delete'}).then((r)=>{if(r.isConfirmed)$el.submit()})">
+                                        @submit.prevent="Swal.fire({title:'Hapus Tugas?',icon:'warning',showCancelButton:true,confirmButtonColor:'#f43f5e',confirmButtonText:'Hapus', cancelButtonText:'Batal'}).then((r)=>{if(r.isConfirmed)$el.submit()})">
                                         @csrf @method('DELETE')<button type="submit"
                                             class="btn btn-sm btn-ghost text-rose-500" title="Delete"><svg class="w-4 h-4"
                                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -68,9 +68,9 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                                     </svg>
-                                    <p class="empty-state-title">No Homework Yet</p><a
+                                    <p class="empty-state-title">Belum Ada Tugas</p><a
                                         href="{{ route('dashboard.homeworks.create', $course->slug) }}"
-                                        class="btn-primary mt-4">Add Homework</a>
+                                        class="btn-primary mt-4">Tambah Tugas</a>
                                 </div>
                             </td>
                         </tr>

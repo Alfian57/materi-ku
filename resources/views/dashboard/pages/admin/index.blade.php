@@ -1,13 +1,13 @@
 <x-layouts.dashboard :title="$title">
     <div class="card">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-            <p class="text-[rgb(var(--color-text-muted))]">Manage all administrators</p>
+            <p class="text-[rgb(var(--color-text-muted))]">Kelola semua administrator</p>
             <a href="{{ route('dashboard.admins.create') }}" class="btn-primary">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
-                Add Admin
+                Tambah Admin
             </a>
         </div>
 
@@ -17,7 +17,7 @@
                     <tr>
                         <th>Admin</th>
                         <th>Email</th>
-                        <th class="text-right">Actions</th>
+                        <th class="text-right">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,7 +54,7 @@
                                     </a>
                                     <form action="{{ route('dashboard.admins.destroy', $item->id) }}" method="POST"
                                         class="inline" x-data
-                                        @submit.prevent="Swal.fire({title:'Delete Admin?',text:'This action cannot be undone.',icon:'warning',showCancelButton:true,confirmButtonColor:'#f43f5e',confirmButtonText:'Yes, delete!'}).then((r)=>{if(r.isConfirmed)$el.submit()})">
+                                        @submit.prevent="Swal.fire({title:'Hapus Admin?',text:'Tindakan ini tidak dapat dibatalkan.',icon:'warning',showCancelButton:true,confirmButtonColor:'#f43f5e',confirmButtonText:'Ya, hapus!',cancelButtonText:'Batal'}).then((r)=>{if(r.isConfirmed)$el.submit()})">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
@@ -76,9 +76,10 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35" />
                                     </svg>
-                                    <p class="empty-state-title">No Admins Found</p>
-                                    <p class="empty-state-description">Get started by adding your first admin.</p>
-                                    <a href="{{ route('dashboard.admins.create') }}" class="btn-primary mt-4">Add Admin</a>
+                                    <p class="empty-state-title">Tidak Ada Admin Ditemukan</p>
+                                    <p class="empty-state-description">Mulai dengan menambahkan admin pertama Anda.</p>
+                                    <a href="{{ route('dashboard.admins.create') }}" class="btn-primary mt-4">Tambah
+                                        Admin</a>
                                 </div>
                             </td>
                         </tr>

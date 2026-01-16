@@ -10,14 +10,14 @@
                     </svg></a>
                 <div>
                     <h2 class="text-lg font-bold">{{ $homework->title }}</h2>
-                    <p class="text-sm text-[rgb(var(--color-text-muted))]">Submit your answer</p>
+                    <p class="text-sm text-[rgb(var(--color-text-muted))]">Kumpulkan jawaban Anda</p>
                 </div>
             </div>
 
             <!-- Homework Instructions -->
             <div class="p-4 rounded-xl bg-gray-50 dark:bg-zinc-800 mb-6">
                 <h3 class="font-semibold mb-2 text-sm text-[rgb(var(--color-text-muted))] uppercase tracking-wider">
-                    Instructions</h3>
+                    Instruksi</h3>
                 <div class="prose prose-sm dark:prose-invert max-w-none">{!! nl2br(e($homework->content)) !!}</div>
             </div>
 
@@ -26,17 +26,17 @@
                 method="POST" enctype="multipart/form-data" class="space-y-5">
                 @csrf
                 <div>
-                    <label for="file" class="form-label">Upload Answer (PDF, max 2MB)</label>
+                    <label for="file" class="form-label">Unggah Jawaban (PDF, maks 2MB)</label>
                     <input type="file" id="file" name="file" accept="application/pdf"
                         class="form-input @error('file') is-invalid @enderror" required>
                     @error('file')<p class="form-error">{{ $message }}</p>@enderror
                 </div>
 
                 <div>
-                    <label for="review" class="form-label">Your Review for This Course</label>
+                    <label for="review" class="form-label">Ulasan Anda untuk Kursus Ini</label>
                     <textarea id="review" name="review" rows="4"
                         class="form-input @error('review') is-invalid @enderror"
-                        placeholder="Share your thoughts about this course..." required></textarea>
+                        placeholder="Bagikan pendapat Anda tentang kursus ini..." required></textarea>
                     @error('review')<p class="form-error">{{ $message }}</p>@enderror
                 </div>
 
@@ -45,17 +45,17 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span class="text-sm">Submitting your answer will also post a review for this course.</span>
+                    <span class="text-sm">Mengumpulkan jawaban Anda juga akan memposting ulasan untuk kursus ini.</span>
                 </div>
 
                 <div class="flex items-center justify-end gap-3 pt-4 border-t border-[rgb(var(--color-border))]">
                     <a href="{{ route('dashboard.student.course.homework', $course->slug) }}"
-                        class="btn-ghost">Cancel</a>
+                        class="btn-ghost">Batal</a>
                     <button type="submit" class="btn-primary"><svg class="w-5 h-5" fill="none" stroke="currentColor"
                             viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                        </svg>Submit Answer</button>
+                        </svg>Kumpulkan Jawaban</button>
                 </div>
             </form>
         </div>

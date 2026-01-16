@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
             Account::create([
                 'accountable_id' => $teacher->id,
                 'accountable_type' => Teacher::class,
-                'email' => 'guru' . ($index + 1) . '@materi-ku.com',
+                'email' => $index === 0 ? 'teacher@materi-ku.com' : 'guru' . ($index + 1) . '@materi-ku.com',
                 'password' => bcrypt('password'),
             ]);
         }
@@ -52,7 +52,7 @@ class UserSeeder extends Seeder
             Account::create([
                 'accountable_id' => $student->id,
                 'accountable_type' => Student::class,
-                'email' => 'siswa' . ($index + 1) . '@materi-ku.com',
+                'email' => $index === 0 ? 'alfian@student.com' : 'siswa' . ($index + 1) . '@materi-ku.com',
                 'password' => bcrypt('password'),
             ]);
         }

@@ -3,14 +3,14 @@
         <!-- Header -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
             <div>
-                <p class="text-[rgb(var(--color-text-muted))]">Manage all registered students</p>
+                <p class="text-[rgb(var(--color-text-muted))]">Kelola semua siswa terdaftar</p>
             </div>
             <a href="{{ route('dashboard.students.create') }}" class="btn-primary">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
-                Add Student
+                Tambah Siswa
             </a>
         </div>
 
@@ -19,12 +19,12 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Student</th>
+                        <th>Siswa</th>
                         <th>Email</th>
                         <th>Level</th>
-                        <th>Points</th>
-                        <th>Address</th>
-                        <th class="text-right">Actions</th>
+                        <th>Poin</th>
+                        <th>Alamat</th>
+                        <th class="text-right">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,17 +61,18 @@
                                     </a>
                                     <form action="{{ route('dashboard.students.destroy', $item->id) }}" method="POST"
                                         class="inline" x-data @submit.prevent="
-                                            Swal.fire({
-                                                title: 'Delete Student?',
-                                                text: 'This action cannot be undone.',
-                                                icon: 'warning',
-                                                showCancelButton: true,
-                                                confirmButtonColor: '#f43f5e',
-                                                confirmButtonText: 'Yes, delete it!'
-                                            }).then((result) => {
-                                                if (result.isConfirmed) $el.submit();
-                                            })
-                                        ">
+                                                Swal.fire({
+                                                    title: 'Hapus Siswa?',
+                                                    text: 'Tindakan ini tidak dapat dibatalkan.',
+                                                    icon: 'warning',
+                                                    showCancelButton: true,
+                                                    confirmButtonColor: '#f43f5e',
+                                                    confirmButtonText: 'Ya, hapus!',
+                                                    cancelButtonText: 'Batal'
+                                                }).then((result) => {
+                                                    if (result.isConfirmed) $el.submit();
+                                                })
+                                            ">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
@@ -93,10 +94,10 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                                     </svg>
-                                    <p class="empty-state-title">No Students Found</p>
-                                    <p class="empty-state-description">Get started by adding your first student.</p>
-                                    <a href="{{ route('dashboard.students.create') }}" class="btn-primary mt-4">Add
-                                        Student</a>
+                                    <p class="empty-state-title">Tidak Ada Siswa Ditemukan</p>
+                                    <p class="empty-state-description">Mulai dengan menambahkan siswa pertama Anda.</p>
+                                    <a href="{{ route('dashboard.students.create') }}" class="btn-primary mt-4">Tambah
+                                        Siswa</a>
                                 </div>
                             </td>
                         </tr>

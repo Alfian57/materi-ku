@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="none">
+    <defs>
+        <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" /> <!-- Indigo-500 -->
+            <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" /> <!-- Violet-500 -->
+        </linearGradient>
+        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="15" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+    </defs>
+    
+    <!-- Background Shape (Rounded Square) -->
+    <rect x="32" y="32" width="448" height="448" rx="128" fill="url(#mainGradient)" />
+    
+    <!-- Book/Graduation Cap Icon -->
+    <g transform="translate(106, 136) scale(0.6)" fill="white">
+        <!-- Graduation Cap / Open Book stylized -->
+        <path d="M250 60l-200 100 200 100 200-100z" />
+        <path d="M50 190v120c0 0 0 60 200 60s200-60 200-60v-120l-200 100z" opacity="0.9" />
+        <!-- Bookmark / Tassel -->
+        <path d="M450 160v120c0 20-20 40-40 40" stroke="white" stroke-width="30" stroke-linecap="round" fill="none" opacity="0.8"/>
+    </g>
+</svg>

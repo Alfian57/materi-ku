@@ -9,8 +9,8 @@
                     </svg>
                 </a>
                 <div>
-                    <h2 class="text-lg font-bold">Create New Course</h2>
-                    <p class="text-sm text-[rgb(var(--color-text-muted))]">Add a new course for students</p>
+                    <h2 class="text-lg font-bold">Buat Kursus Baru</h2>
+                    <p class="text-sm text-[rgb(var(--color-text-muted))]">Tambahkan kursus baru untuk siswa</p>
                 </div>
             </div>
 
@@ -18,24 +18,24 @@
                 class="space-y-5">
                 @csrf
                 <div>
-                    <label for="title" class="form-label">Course Title</label>
+                    <label for="title" class="form-label">Judul Kursus</label>
                     <input type="text" id="title" name="title" value="{{ old('title') }}"
-                        class="form-input @error('title') is-invalid @enderror" placeholder="Enter course title...">
+                        class="form-input @error('title') is-invalid @enderror" placeholder="Masukkan judul kursus...">
                     @error('title')<p class="form-error">{{ $message }}</p>@enderror
                 </div>
 
                 <div>
-                    <label for="thumbnail" class="form-label">Thumbnail Image</label>
+                    <label for="thumbnail" class="form-label">Gambar Thumbnail</label>
                     <input type="file" id="thumbnail" name="thumbnail" accept="image/*"
                         class="form-input @error('thumbnail') is-invalid @enderror">
                     @error('thumbnail')<p class="form-error">{{ $message }}</p>@enderror
                 </div>
 
                 <div>
-                    <label for="course_category_id" class="form-label">Category</label>
+                    <label for="course_category_id" class="form-label">Kategori</label>
                     <select id="course_category_id" name="course_category_id"
                         class="form-select @error('course_category_id') is-invalid @enderror">
-                        <option value="">Select a category...</option>
+                        <option value="">Pilih kategori...</option>
                         @foreach ($courseCategories as $category)
                             <option value="{{ $category->id }}" {{ old('course_category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                         @endforeach
@@ -44,29 +44,29 @@
                 </div>
 
                 <div>
-                    <label for="description" class="form-label">Short Description</label>
+                    <label for="description" class="form-label">Deskripsi Singkat</label>
                     <textarea id="description" name="description" rows="3"
                         class="form-input @error('description') is-invalid @enderror"
-                        placeholder="Brief description of the course...">{{ old('description') }}</textarea>
+                        placeholder="Deskripsi singkat kursus...">{{ old('description') }}</textarea>
                     @error('description')<p class="form-error">{{ $message }}</p>@enderror
                 </div>
 
                 <div>
-                    <label for="content" class="form-label">Course Content</label>
+                    <label for="content" class="form-label">Konten Kursus</label>
                     <textarea id="content" name="content" rows="10"
                         class="form-input @error('content') is-invalid @enderror"
-                        placeholder="Full course content...">{{ old('content') }}</textarea>
+                        placeholder="Konten lengkap kursus...">{{ old('content') }}</textarea>
                     @error('content')<p class="form-error">{{ $message }}</p>@enderror
                 </div>
 
                 <div class="flex items-center justify-end gap-3 pt-4 border-t border-[rgb(var(--color-border))]">
-                    <a href="{{ route('dashboard.courses.index') }}" class="btn-ghost">Cancel</a>
+                    <a href="{{ route('dashboard.courses.index') }}" class="btn-ghost">Batal</a>
                     <button type="submit" class="btn-primary">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                         </svg>
-                        Create Course
+                        Buat Kursus
                     </button>
                 </div>
             </form>

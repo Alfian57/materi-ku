@@ -22,9 +22,10 @@
 
         <!-- Content -->
         <div class="card">
-            <h2 class="font-bold text-lg mb-4">Course Content</h2>
+            <h2 class="font-bold text-lg mb-4">Konten Kursus</h2>
             <div class="prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap">
-                {!! nl2br(e($course->content)) !!}</div>
+                {!! nl2br(e($course->content)) !!}
+            </div>
         </div>
 
         <!-- Actions -->
@@ -35,10 +36,10 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                     </svg>
-                    View Homework ({{ $course->homeworks->count() }})
+                    Lihat Tugas ({{ $course->homeworks->count() }})
                 </a>
             @else
-                <span class="text-[rgb(var(--color-text-muted))]">No homework available for this course.</span>
+                <span class="text-[rgb(var(--color-text-muted))]">Tidak ada tugas tersedia untuk kursus ini.</span>
             @endif
         </div>
     </div>

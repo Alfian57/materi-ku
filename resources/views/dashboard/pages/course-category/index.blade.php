@@ -1,13 +1,13 @@
 <x-layouts.dashboard :title="$title">
     <div class="card">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-            <p class="text-[rgb(var(--color-text-muted))]">Manage course categories</p>
+            <p class="text-[rgb(var(--color-text-muted))]">Kelola kategori kursus</p>
             <a href="{{ route('dashboard.course-categories.create') }}" class="btn-primary">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
-                Add Category
+                Tambah Kategori
             </a>
         </div>
 
@@ -25,7 +25,7 @@
                             <div>
                                 <h3 class="font-semibold">{{ $item->name }}</h3>
                                 <p class="text-xs text-[rgb(var(--color-text-muted))]">{{ $item->courses_count ?? 0 }}
-                                    courses</p>
+                                    kursus</p>
                             </div>
                         </div>
                         <div class="flex items-center gap-1">
@@ -38,7 +38,7 @@
                             </a>
                             <form action="{{ route('dashboard.course-categories.destroy', $item->slug) }}" method="POST"
                                 class="inline" x-data
-                                @submit.prevent="Swal.fire({title:'Delete Category?',text:'This will affect all associated courses.',icon:'warning',showCancelButton:true,confirmButtonColor:'#f43f5e',confirmButtonText:'Yes, delete!'}).then((r)=>{if(r.isConfirmed)$el.submit()})">
+                                @submit.prevent="Swal.fire({title:'Hapus Kategori?',text:'Ini akan mempengaruhi semua kursus terkait.',icon:'warning',showCancelButton:true,confirmButtonColor:'#f43f5e',confirmButtonText:'Ya, hapus!',cancelButtonText:'Batal'}).then((r)=>{if(r.isConfirmed)$el.submit()})">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-ghost text-rose-500">
@@ -58,10 +58,10 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                         </svg>
-                        <p class="empty-state-title">No Categories Found</p>
-                        <p class="empty-state-description">Create your first category to organize courses.</p>
-                        <a href="{{ route('dashboard.course-categories.create') }}" class="btn-primary mt-4">Add
-                            Category</a>
+                        <p class="empty-state-title">Tidak Ada Kategori Ditemukan</p>
+                        <p class="empty-state-description">Buat kategori pertama Anda untuk mengorganisir kursus.</p>
+                        <a href="{{ route('dashboard.course-categories.create') }}" class="btn-primary mt-4">Tambah
+                            Kategori</a>
                     </div>
                 </div>
             @endforelse

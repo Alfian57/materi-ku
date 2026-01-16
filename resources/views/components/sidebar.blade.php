@@ -3,9 +3,8 @@
     <!-- Logo -->
     <div class="p-6 border-b border-[rgb(var(--color-border))]">
         <a href="{{ route('dashboard.index') }}" class="flex items-center gap-3">
-            <div
-                class="w-10 h-10 bg-gradient-playful rounded-xl flex items-center justify-center text-white text-xl shadow-glow">
-                📚
+            <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-glow overflow-hidden">
+                <img src="{{ asset('logo/logo.svg') }}" alt="Materi-Ku Logo" class="w-full h-full object-cover">
             </div>
             <span class="text-xl font-bold text-gradient">Materi-Ku</span>
         </a>
@@ -109,7 +108,7 @@
 
             @if (auth()->user()->accountable_type === 'App\Models\Student')
                 <!-- Student Menu -->
-                <li class="sidebar-title">Main Menu</li>
+                <li class="sidebar-title">Menu Utama</li>
 
                 <li>
                     <a href="{{ route('dashboard.student.reviews.histories') }}"
@@ -157,7 +156,13 @@
                     @if (Auth::user()->accountable_type === 'App\Models\Student')
                         Level {{ Auth::user()->accountable->level }}
                     @else
-                        {{ class_basename(Auth::user()->accountable_type) }}
+                        @if(Auth::user()->accountable_type === 'App\Models\Admin')
+                            Admin
+                        @elseif(Auth::user()->accountable_type === 'App\Models\Teacher')
+                            Pengajar
+                        @else
+                            {{ class_basename(Auth::user()->accountable_type) }}
+                        @endif
                     @endif
                 </p>
             </div>

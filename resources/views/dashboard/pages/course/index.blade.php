@@ -1,13 +1,13 @@
 <x-layouts.dashboard :title="$title">
     <div class="card">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-            <p class="text-[rgb(var(--color-text-muted))]">Manage your courses</p>
+            <p class="text-[rgb(var(--color-text-muted))]">Kelola kursus Anda</p>
             <a href="{{ route('dashboard.courses.create') }}" class="btn-primary">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                 </svg>
-                Add Course
+                Tambah Kursus
             </a>
         </div>
 
@@ -15,11 +15,11 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Course</th>
+                        <th>Kursus</th>
                         <th>Thumbnail</th>
-                        <th>Category</th>
-                        <th>Description</th>
-                        <th class="text-right">Actions</th>
+                        <th>Kategori</th>
+                        <th>Deskripsi</th>
+                        <th class="text-right">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,7 +35,8 @@
                             </td>
                             <td><span class="badge badge-accent">{{ $item->courseCategory->name }}</span></td>
                             <td class="text-[rgb(var(--color-text-muted))] max-w-xs truncate">
-                                {{ Str::limit($item->description, 50) }}</td>
+                                {{ Str::limit($item->description, 50) }}
+                            </td>
                             <td>
                                 <div class="flex items-center justify-end gap-1">
                                     <a href="{{ route('dashboard.courses.show', $item->slug) }}"
@@ -66,7 +67,7 @@
                                     </a>
                                     <form action="{{ route('dashboard.courses.destroy', $item->slug) }}" method="POST"
                                         class="inline" x-data
-                                        @submit.prevent="Swal.fire({title:'Delete Course?',text:'This will also delete all homework and assignments.',icon:'warning',showCancelButton:true,confirmButtonColor:'#f43f5e',confirmButtonText:'Yes, delete!'}).then((r)=>{if(r.isConfirmed)$el.submit()})">
+                                        @submit.prevent="Swal.fire({title:'Hapus Kursus?',text:'Ini juga akan menghapus semua tugas dan pengumpulan.',icon:'warning',showCancelButton:true,confirmButtonColor:'#f43f5e',confirmButtonText:'Ya, hapus!',cancelButtonText:'Batal'}).then((r)=>{if(r.isConfirmed)$el.submit()})">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"
@@ -89,10 +90,10 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                                     </svg>
-                                    <p class="empty-state-title">No Courses Found</p>
-                                    <p class="empty-state-description">Create your first course to get started.</p>
-                                    <a href="{{ route('dashboard.courses.create') }}" class="btn-primary mt-4">Add
-                                        Course</a>
+                                    <p class="empty-state-title">Tidak Ada Kursus Ditemukan</p>
+                                    <p class="empty-state-description">Buat kursus pertama Anda untuk memulai.</p>
+                                    <a href="{{ route('dashboard.courses.create') }}" class="btn-primary mt-4">Tambah
+                                        Kursus</a>
                                 </div>
                             </td>
                         </tr>

@@ -9,9 +9,9 @@
         </div>
         <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-                <h1 class="text-2xl md:text-3xl font-bold text-white mb-2">Hello, {{ Auth::user()->accountable->name }}!
+                <h1 class="text-2xl md:text-3xl font-bold text-white mb-2">Halo, {{ Auth::user()->accountable->name }}!
                     🎓</h1>
-                <p class="text-white/80">Ready to continue your learning journey?</p>
+                <p class="text-white/80">Siap untuk melanjutkan perjalanan belajar Anda?</p>
                 <div class="flex items-center gap-4 mt-4">
                     <div class="flex items-center gap-2 text-white/90">
                         <span class="text-2xl font-bold">{{ Auth::user()->accountable->level }}</span>
@@ -20,12 +20,12 @@
                     <div class="w-px h-8 bg-white/30"></div>
                     <div class="flex items-center gap-2 text-white/90">
                         <span class="text-2xl font-bold">{{ number_format(Auth::user()->accountable->point) }}</span>
-                        <span class="text-sm">Points</span>
+                        <span class="text-sm">Poin</span>
                     </div>
                 </div>
             </div>
             <a href="#courses" class="btn bg-white/20 text-white backdrop-blur-sm hover:bg-white/30 transition-colors">
-                Browse Courses
+                Jelajahi Kursus
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                 </svg>
@@ -41,9 +41,9 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
-                Available Courses
+                Kursus Tersedia
             </h2>
-            <span class="text-sm text-[rgb(var(--color-text-muted))]">{{ $courses->total() }} courses</span>
+            <span class="text-sm text-[rgb(var(--color-text-muted))]">{{ $courses->total() }} kursus</span>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -72,7 +72,7 @@
                             </div>
                             <a href="{{ route('dashboard.student.course.learn', $course->slug) }}"
                                 class="btn btn-sm btn-primary px-3 py-1.5 text-xs">
-                                Learn
+                                Belajar
                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M9 5l7 7-7 7" />
@@ -88,8 +88,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                         </svg>
-                        <p class="empty-state-title">No Courses Available</p>
-                        <p class="empty-state-description">Check back later for new courses!</p>
+                        <p class="empty-state-title">Tidak Ada Kursus Tersedia</p>
+                        <p class="empty-state-description">Cek kembali nanti untuk kursus baru!</p>
                     </div>
                 </div>
             @endforelse

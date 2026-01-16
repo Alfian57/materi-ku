@@ -5,16 +5,16 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
             </svg>
-            My Assignments
+            Tugas Saya
         </h2>
         <div class="table-container">
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Course</th>
-                        <th>Homework</th>
+                        <th>Kursus</th>
+                        <th>Tugas</th>
                         <th>Status</th>
-                        <th>Score</th>
+                        <th>Nilai</th>
                         <th>File</th>
                     </tr>
                 </thead>
@@ -25,9 +25,9 @@
                             <td class="text-[rgb(var(--color-text-muted))]">{{ $item->homework->title }}</td>
                             <td>
                                 @if($item->status == 'submitted')
-                                    <span class="badge badge-warning">Submitted</span>
+                                    <span class="badge badge-warning">Dikumpulkan</span>
                                 @elseif($item->status == 'graded')
-                                    <span class="badge badge-success">Graded</span>
+                                    <span class="badge badge-success">Dinilai</span>
                                 @endif
                             </td>
                             <td>
@@ -58,8 +58,9 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                                     </svg>
-                                    <p class="empty-state-title">No Assignments Yet</p>
-                                    <p class="empty-state-description">Complete homework to see your submissions here.</p>
+                                    <p class="empty-state-title">Belum Ada Tugas</p>
+                                    <p class="empty-state-description">Selesaikan tugas untuk melihat pengumpulan Anda di
+                                        sini.</p>
                                 </div>
                             </td>
                         </tr>

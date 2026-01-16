@@ -7,8 +7,8 @@
             <div class="absolute -bottom-8 -left-8 w-48 h-48 border-4 border-white/20 rounded-full"></div>
         </div>
         <div class="relative z-10">
-            <h1 class="text-2xl font-bold text-white mb-2">Welcome Back! 👋</h1>
-            <p class="text-white/80">Here's what's happening with your platform today.</p>
+            <h1 class="text-2xl font-bold text-white mb-2">Selamat Datang Kembali! 👋</h1>
+            <p class="text-white/80">Inilah yang terjadi dengan platform Anda hari ini.</p>
         </div>
     </div>
 
@@ -26,9 +26,10 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="text-sm text-[rgb(var(--color-text-muted))] font-medium">Teachers</p>
+                    <p class="text-sm text-[rgb(var(--color-text-muted))] font-medium">Pengajar</p>
                     <p class="text-2xl font-bold text-primary-600 dark:text-primary-400">
-                        {{ number_format($teacherCount) }}</p>
+                        {{ number_format($teacherCount) }}
+                    </p>
                 </div>
             </div>
         </div>
@@ -45,9 +46,10 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="text-sm text-[rgb(var(--color-text-muted))] font-medium">Students</p>
+                    <p class="text-sm text-[rgb(var(--color-text-muted))] font-medium">Siswa</p>
                     <p class="text-2xl font-bold text-secondary-600 dark:text-secondary-400">
-                        {{ number_format($studentCount) }}</p>
+                        {{ number_format($studentCount) }}
+                    </p>
                 </div>
             </div>
         </div>
@@ -64,7 +66,7 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="text-sm text-[rgb(var(--color-text-muted))] font-medium">Courses</p>
+                    <p class="text-sm text-[rgb(var(--color-text-muted))] font-medium">Kursus</p>
                     <p class="text-2xl font-bold text-accent-600 dark:text-accent-400">{{ number_format($courseCount) }}
                     </p>
                 </div>
@@ -83,9 +85,10 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="text-sm text-[rgb(var(--color-text-muted))] font-medium">Homework</p>
+                    <p class="text-sm text-[rgb(var(--color-text-muted))] font-medium">Tugas</p>
                     <p class="text-2xl font-bold text-emerald-600 dark:text-emerald-400">
-                        {{ number_format($homeworkCount) }}</p>
+                        {{ number_format($homeworkCount) }}
+                    </p>
                 </div>
             </div>
         </div>
@@ -101,7 +104,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
                     </svg>
-                    Latest Reviews
+                    Ulasan Terbaru
                 </h2>
             </div>
             <div class="space-y-4">
@@ -130,8 +133,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                         </svg>
-                        <p class="empty-state-title">No Reviews Yet</p>
-                        <p class="empty-state-description">Student reviews will appear here.</p>
+                        <p class="empty-state-title">Belum Ada Ulasan</p>
+                        <p class="empty-state-description">Ulasan siswa akan muncul di sini.</p>
                     </div>
                 @endforelse
             </div>
@@ -139,7 +142,7 @@
 
         <!-- Quick Actions -->
         <div class="card">
-            <h2 class="text-lg font-bold mb-4">Quick Actions</h2>
+            <h2 class="text-lg font-bold mb-4">Aksi Cepat</h2>
             <div class="space-y-3">
                 @if (auth()->user()->accountable_type === 'App\Models\Admin')
                     <a href="{{ route('dashboard.students.create') }}"
@@ -151,7 +154,7 @@
                                     d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                             </svg>
                         </div>
-                        <span class="font-medium">Add Student</span>
+                        <span class="font-medium">Tambah Siswa</span>
                     </a>
                     <a href="{{ route('dashboard.teachers.create') }}"
                         class="flex items-center gap-3 p-3 rounded-xl hover:bg-secondary-50 dark:hover:bg-secondary-900/20 transition-colors group">
@@ -162,7 +165,7 @@
                                     d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                             </svg>
                         </div>
-                        <span class="font-medium">Add Teacher</span>
+                        <span class="font-medium">Tambah Pengajar</span>
                     </a>
                     <a href="{{ route('dashboard.course-categories.create') }}"
                         class="flex items-center gap-3 p-3 rounded-xl hover:bg-accent-50 dark:hover:bg-accent-900/20 transition-colors group">
@@ -173,7 +176,7 @@
                                     d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                             </svg>
                         </div>
-                        <span class="font-medium">Add Category</span>
+                        <span class="font-medium">Tambah Kategori</span>
                     </a>
                 @else
                     <a href="{{ route('dashboard.courses.create') }}"
@@ -185,7 +188,7 @@
                                     d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                             </svg>
                         </div>
-                        <span class="font-medium">Create Course</span>
+                        <span class="font-medium">Buat Kursus</span>
                     </a>
                     <a href="{{ route('dashboard.courses.index') }}"
                         class="flex items-center gap-3 p-3 rounded-xl hover:bg-secondary-50 dark:hover:bg-secondary-900/20 transition-colors group">
@@ -196,7 +199,7 @@
                                     d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                             </svg>
                         </div>
-                        <span class="font-medium">Manage Courses</span>
+                        <span class="font-medium">Kelola Kursus</span>
                     </a>
                 @endif
                 <a href="{{ route('dashboard.profile.index') }}"
@@ -208,7 +211,7 @@
                                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                     </div>
-                    <span class="font-medium">Edit Profile</span>
+                    <span class="font-medium">Edit Profil</span>
                 </a>
             </div>
         </div>

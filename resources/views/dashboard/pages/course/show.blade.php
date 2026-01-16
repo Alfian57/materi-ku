@@ -24,12 +24,12 @@
             <!-- Content -->
             <div class="lg:col-span-2 space-y-6">
                 <div class="card">
-                    <h2 class="font-bold text-lg mb-4">About This Course</h2>
+                    <h2 class="font-bold text-lg mb-4">Tentang Kursus Ini</h2>
                     <p class="text-[rgb(var(--color-text-muted))] whitespace-pre-wrap">{{ $course->description }}</p>
                 </div>
 
                 <div class="card">
-                    <h2 class="font-bold text-lg mb-4">Course Content</h2>
+                    <h2 class="font-bold text-lg mb-4">Konten Kursus</h2>
                     <div class="prose prose-sm dark:prose-invert max-w-none">
                         {!! nl2br(e($course->content)) !!}
                     </div>
@@ -40,21 +40,21 @@
             <div class="space-y-6">
                 <!-- Actions -->
                 <div class="card">
-                    <h3 class="font-bold mb-4">Actions</h3>
+                    <h3 class="font-bold mb-4">Aksi</h3>
                     <div class="space-y-2">
                         <a href="{{ route('dashboard.courses.edit', $course->slug) }}" class="btn-outline w-full">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                             </svg>
-                            Edit Course
+                            Edit Kursus
                         </a>
                         <a href="{{ route('dashboard.homeworks.index', $course->slug) }}" class="btn-secondary w-full">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                             </svg>
-                            Manage Homework
+                            Kelola Tugas
                         </a>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
                         </svg>
-                        Reviews
+                        Ulasan
                     </h3>
                     <div class="space-y-4 max-h-96 overflow-y-auto">
                         @forelse ($course->reviews as $item)
@@ -81,7 +81,7 @@
                                     <div class="flex items-center justify-between mb-1">
                                         <span class="font-medium text-sm">{{ $item->student->name }}</span>
                                         @if ($item->status === 'blocked')
-                                            <span class="badge badge-danger">Blocked</span>
+                                            <span class="badge badge-danger">Diblokir</span>
                                         @endif
                                     </div>
                                     <p class="text-sm text-[rgb(var(--color-text-muted))]">{{ $item->content }}</p>
@@ -89,24 +89,24 @@
                                         @if ($item->status === 'blocked')
                                             <form action="{{ route('dashboard.reviews.unblock', $item->id) }}" method="POST"
                                                 class="inline" x-data
-                                                @submit.prevent="Swal.fire({title:'Unblock Review?',icon:'question',showCancelButton:true,confirmButtonText:'Yes, unblock'}).then((r)=>{if(r.isConfirmed)$el.submit()})">
+                                                @submit.prevent="Swal.fire({title:'Buka Blokir Ulasan?',icon:'question',showCancelButton:true,confirmButtonText:'Ya, buka blokir', cancelButtonText:'Batal'}).then((r)=>{if(r.isConfirmed)$el.submit()})">
                                                 @csrf
-                                                <button type="submit"
-                                                    class="btn btn-sm text-xs bg-emerald-500 text-white">Unblock</button>
+                                                <button type="submit" class="btn btn-sm text-xs bg-emerald-500 text-white">Buka
+                                                    Blokir</button>
                                             </form>
                                         @else
                                             <form action="{{ route('dashboard.reviews.blocked', $item->id) }}" method="POST"
                                                 class="inline" x-data
-                                                @submit.prevent="Swal.fire({title:'Block Review?',icon:'warning',showCancelButton:true,confirmButtonColor:'#f43f5e',confirmButtonText:'Yes, block'}).then((r)=>{if(r.isConfirmed)$el.submit()})">
+                                                @submit.prevent="Swal.fire({title:'Blokir Ulasan?',icon:'warning',showCancelButton:true,confirmButtonColor:'#f43f5e',confirmButtonText:'Ya, blokir', cancelButtonText:'Batal'}).then((r)=>{if(r.isConfirmed)$el.submit()})">
                                                 @csrf
-                                                <button type="submit" class="btn btn-sm text-xs btn-danger">Block</button>
+                                                <button type="submit" class="btn btn-sm text-xs btn-danger">Blokir</button>
                                             </form>
                                         @endif
                                     </div>
                                 </div>
                             </div>
                         @empty
-                            <p class="text-[rgb(var(--color-text-muted))] text-sm text-center py-4">No reviews yet</p>
+                            <p class="text-[rgb(var(--color-text-muted))] text-sm text-center py-4">Belum ada ulasan</p>
                         @endforelse
                     </div>
                 </div>

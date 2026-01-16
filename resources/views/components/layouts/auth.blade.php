@@ -6,8 +6,8 @@
                 <!-- Logo -->
                 <div class="flex items-center gap-3 mb-8">
                     <div
-                        class="w-12 h-12 bg-gradient-playful rounded-xl flex items-center justify-center text-white text-2xl shadow-glow">
-                        📚
+                        class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-glow overflow-hidden">
+                        <img src="{{ asset('logo/logo.svg') }}" alt="Materi-Ku Logo" class="w-full h-full object-cover">
                     </div>
                     <span class="text-2xl font-bold text-gradient">Materi-Ku</span>
                 </div>
