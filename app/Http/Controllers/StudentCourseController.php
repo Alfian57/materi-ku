@@ -29,10 +29,15 @@ class StudentCourseController extends Controller
 
     public function form(Course $course, Homework $homework)
     {
+        $alreadySubmitted = Assignment::where('homework_id', $homework->id)
+            ->where('student_id', Auth::user()->accountable->id)
+            ->exists();
+
         return view('dashboard.pages.student-course.assignment', [
             'title' => 'Kumpulkan Tugas ' . $homework->course->title,
             'course' => $course,
             'homework' => $homework,
+            'alreadySubmitted' => $alreadySubmitted,
         ]);
     }
 
@@ -45,7 +50,7 @@ class StudentCourseController extends Controller
 
         Assignment::create([
             'student_id' => Auth::user()->accountable->id,
-            'answer' => $request->answer,
+            'content' => $request->answer,
             'file' => $request->file('file')->store('assignments', ['disk' => 'public']),
             'status' => 'submitted',
             'homework_id' => $homework->id,

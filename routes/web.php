@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseCategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EditorImageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentCourseController;
@@ -15,7 +16,7 @@ use App\Http\Controllers\TeacherHomeworkController;
 use App\Http\Controllers\TeacherReviewController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'welcome');
+Route::view('/', 'welcome')->name('landing');
 Route::redirect('login', 'dashboard/login')->name('login');
 
 Route:: as('dashboard.')->prefix('dashboard')->group(function () {
@@ -36,6 +37,9 @@ Route:: as('dashboard.')->prefix('dashboard')->group(function () {
         Route::put('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
         Route::put('/profile-pic', [ProfileController::class, 'updateProfilePic'])->name('profile-pic.update');
         Route::put('/password', [ProfileController::class, 'updatePassword'])->name('password.update');
+
+        // Editor image upload route (for teachers/admins)
+        Route::post('editor/upload-image', [EditorImageController::class, 'upload'])->name('editor.upload-image');
 
         Route::middleware('roles:admin')->group(function () {
             Route::resource('course-categories', CourseCategoryController::class)->except('show');

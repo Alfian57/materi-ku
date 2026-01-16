@@ -64,9 +64,8 @@
 
                 <div>
                     <label for="content" class="form-label">Konten Kursus</label>
-                    <textarea id="content" name="content" rows="10"
-                        class="form-input @error('content') is-invalid @enderror"
-                        placeholder="Konten lengkap kursus...">{{ old('content', $course->content) }}</textarea>
+                    <x-wysiwyg-editor name="content" :value="old('content', $course->content)"
+                        placeholder="Konten lengkap kursus..." />
                     @error('content')<p class="form-error">{{ $message }}</p>@enderror
                 </div>
 

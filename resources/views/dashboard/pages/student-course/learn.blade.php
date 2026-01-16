@@ -23,8 +23,8 @@
         <!-- Content -->
         <div class="card">
             <h2 class="font-bold text-lg mb-4">Konten Kursus</h2>
-            <div class="prose prose-sm dark:prose-invert max-w-none whitespace-pre-wrap">
-                {!! nl2br(e($course->content)) !!}
+            <div class="prose prose-sm dark:prose-invert max-w-none">
+                {!! clean_html($course->content) !!}
             </div>
         </div>
 

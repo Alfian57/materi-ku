@@ -17,7 +17,7 @@
                     <tr>
                         <th>Admin</th>
                         <th>Email</th>
-                        <th class="text-right">Aksi</th>
+                        <th class="!text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,7 +44,7 @@
                             </td>
                             <td class="text-[rgb(var(--color-text-muted))]">{{ $item->account->email }}</td>
                             <td>
-                                <div class="flex items-center justify-end gap-2">
+                                <div class="flex items-center justify-center gap-1">
                                     <a href="{{ route('dashboard.admins.edit', $item->id) }}"
                                         class="btn btn-sm btn-ghost text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-900/20">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -52,19 +52,21 @@
                                                 d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                         </svg>
                                     </a>
-                                    <form action="{{ route('dashboard.admins.destroy', $item->id) }}" method="POST"
-                                        class="inline" x-data
-                                        @submit.prevent="Swal.fire({title:'Hapus Admin?',text:'Tindakan ini tidak dapat dibatalkan.',icon:'warning',showCancelButton:true,confirmButtonColor:'#f43f5e',confirmButtonText:'Ya, hapus!',cancelButtonText:'Batal'}).then((r)=>{if(r.isConfirmed)$el.submit()})">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            class="btn btn-sm btn-ghost text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/20">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                            </svg>
-                                        </button>
-                                    </form>
+                                    @if($item->account->id !== auth()->id())
+                                        <form action="{{ route('dashboard.admins.destroy', $item->id) }}" method="POST"
+                                            class="inline" x-data
+                                            @submit.prevent="Swal.fire({title:'Hapus Admin?',text:'Tindakan ini tidak dapat dibatalkan.',icon:'warning',showCancelButton:true,confirmButtonColor:'#f43f5e',confirmButtonText:'Ya, hapus!',cancelButtonText:'Batal'}).then((r)=>{if(r.isConfirmed)$el.submit()})">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="btn btn-sm btn-ghost text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-900/20">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    @endif
                                 </div>
                             </td>
                         </tr>

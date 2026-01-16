@@ -24,7 +24,7 @@
                         <th>Level</th>
                         <th>Poin</th>
                         <th>Alamat</th>
-                        <th class="text-right">Aksi</th>
+                        <th class="!text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,7 +51,7 @@
                             <td><span class="badge badge-accent">{{ number_format($item->point) }} pts</span></td>
                             <td class="text-[rgb(var(--color-text-muted))] max-w-xs truncate">{{ $item->address }}</td>
                             <td>
-                                <div class="flex items-center justify-end gap-2">
+                                <div class="flex items-center justify-center gap-1">
                                     <a href="{{ route('dashboard.students.edit', $item->id) }}"
                                         class="btn btn-sm btn-ghost text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-900/20">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -61,18 +61,18 @@
                                     </a>
                                     <form action="{{ route('dashboard.students.destroy', $item->id) }}" method="POST"
                                         class="inline" x-data @submit.prevent="
-                                                Swal.fire({
-                                                    title: 'Hapus Siswa?',
-                                                    text: 'Tindakan ini tidak dapat dibatalkan.',
-                                                    icon: 'warning',
-                                                    showCancelButton: true,
-                                                    confirmButtonColor: '#f43f5e',
-                                                    confirmButtonText: 'Ya, hapus!',
-                                                    cancelButtonText: 'Batal'
-                                                }).then((result) => {
-                                                    if (result.isConfirmed) $el.submit();
-                                                })
-                                            ">
+                                                        Swal.fire({
+                                                            title: 'Hapus Siswa?',
+                                                            text: 'Tindakan ini tidak dapat dibatalkan.',
+                                                            icon: 'warning',
+                                                            showCancelButton: true,
+                                                            confirmButtonColor: '#f43f5e',
+                                                            confirmButtonText: 'Ya, hapus!',
+                                                            cancelButtonText: 'Batal'
+                                                        }).then((result) => {
+                                                            if (result.isConfirmed) $el.submit();
+                                                        })
+                                                    ">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit"

@@ -7,27 +7,11 @@
         <form action="{{ route('dashboard.login.authenticate') }}" method="POST" class="space-y-5">
             @csrf
 
-            <!-- Email -->
-            <div>
-                <label for="email" class="form-label">Alamat Email</label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                        <svg class="w-5 h-5 text-[rgb(var(--color-text-muted))]" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
-                        </svg>
-                    </div>
-                    <input type="email" id="email" name="email" value="{{ old('email') }}"
-                        class="form-input pl-12 @error('email') is-invalid @enderror"
-                        placeholder="Masukkan email Anda...">
-                </div>
-                @error('email')
-                    <p class="form-error">{{ $message }}</p>
-                @enderror
-            </div>
+            {{-- Email --}}
+            <x-ui.input label="Alamat Email" name="email" type="email" placeholder="Masukkan email Anda..." icon="mail"
+                value="{{ old('email') }}" />
 
-            <!-- Password -->
+            {{-- Password --}}
             <div>
                 <label for="password" class="form-label">Kata Sandi</label>
                 <div class="relative" x-data="{ showPassword: false }">
@@ -64,14 +48,16 @@
                 @enderror
             </div>
 
-            <!-- Submit Button -->
-            <button type="submit" class="btn-primary w-full">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-                </svg>
+            {{-- Submit --}}
+            <x-ui.button type="submit" class="w-full justify-center">
+                <x-slot:icon>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                    </svg>
+                </x-slot:icon>
                 Masuk
-            </button>
+            </x-ui.button>
         </form>
 
         <!-- Register Link -->

@@ -16,10 +16,8 @@ class AssignmentSeeder extends Seeder
         $students = Student::all();
         $homeworks = Homework::take(5)->get();
 
-        // Create a dummy PDF file for assignments
-        $dummyPdfContent = '%PDF-1.4 Dummy Assignment File';
-        $pdfPath = 'assignments/dummy_assignment.pdf';
-        Storage::disk('public')->put($pdfPath, $dummyPdfContent);
+        // Path to the fixture PDF
+        $fixturePdf = storage_path('fixtures/dummy_assignment.pdf');
 
         $statuses = ['submitted', 'graded'];
 
@@ -28,9 +26,12 @@ class AssignmentSeeder extends Seeder
                 $status = $statuses[array_rand($statuses)];
                 $point = $status === 'graded' ? rand(60, 100) : null;
 
-                // Copy the dummy PDF with a unique name
+                // Copy fixture PDF to public storage with unique name
                 $uniquePdfPath = 'assignments/' . Str::uuid() . '.pdf';
-                Storage::disk('public')->copy($pdfPath, $uniquePdfPath);
+
+                if (file_exists($fixturePdf)) {
+                    Storage::disk('public')->put($uniquePdfPath, file_get_contents($fixturePdf));
+                }
 
                 Assignment::create([
                     'student_id' => $student->id,

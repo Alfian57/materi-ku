@@ -78,7 +78,6 @@ class TeacherCourseController extends Controller
             'thumbnail' => 'nullable|image|max:2048',
             'content' => 'required|string|min:10',
             'course_category_id' => 'required|exists:course_categories,id',
-            'teacher_id' => 'required|exists:teachers,id',
         ]);
 
         if ($request->hasFile('thumbnail')) {

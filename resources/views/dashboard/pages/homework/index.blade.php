@@ -19,7 +19,7 @@
                 <thead>
                     <tr>
                         <th>Judul Tugas</th>
-                        <th class="text-right">Aksi</th>
+                        <th class="!text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,7 +27,7 @@
                         <tr class="animate-fade-in">
                             <td><span class="font-medium">{{ $item->title }}</span></td>
                             <td>
-                                <div class="flex items-center justify-end gap-1">
+                                <div class="flex items-center justify-center gap-1">
                                     <a href="{{ route('dashboard.homeworks.show', [$course->slug, $item->slug]) }}"
                                         class="btn btn-sm btn-ghost text-secondary-500" title="View"><svg class="w-4 h-4"
                                             fill="none" stroke="currentColor" viewBox="0 0 24 24">

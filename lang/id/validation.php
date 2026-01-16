@@ -166,16 +166,20 @@ return [
     'attributes' => [
         'email' => 'alamat email',
         'password' => 'kata sandi',
+        'current_password' => 'kata sandi saat ini',
+        'new_password' => 'kata sandi baru',
         'name' => 'nama',
         'username' => 'nama pengguna',
         'title' => 'judul',
         'description' => 'deskripsi',
         'content' => 'konten',
         'thumbnail' => 'gambar thumbnail',
+        'profile_picture' => 'foto profil',
         'file' => 'berkas',
         'review' => 'ulasan',
         'address' => 'alamat',
         'point' => 'nilai',
+        'course_category_id' => 'kategori kursus',
     ],
 
 ];

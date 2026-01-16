@@ -12,9 +12,9 @@
                 <thead>
                     <tr>
                         <th>Siswa</th>
-                        <th>Pengumpulan</th>
+
                         <th>Nilai</th>
-                        <th class="text-right">Aksi</th>
+                        <th class="!text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,16 +28,16 @@
                                             {{ strtoupper(substr($item->student->name, 0, 1)) }}
                                         </div>
                                     </div><span class="font-medium">{{ $item->student->name }}</span>
+                                    @if(!in_array($item->student_id, $gradedStudentIds))
+                                        <span class="badge badge-primary text-xs ml-2">Prioritas</span>
+                                    @endif
                                 </div>
                             </td>
-                            <td class="max-w-xs truncate text-[rgb(var(--color-text-muted))]">
-                                {{ Str::limit($item->content, 50) }}
-                            </td>
-                            <td>@if($item->score)<span
-                            class="badge {{ $item->score >= 70 ? 'badge-success' : 'badge-warning' }}">{{ $item->score }}/100</span>@else<span
+                            <td>@if($item->point !== null)<span
+                            class="badge {{ $item->point >= 70 ? 'badge-success' : 'badge-warning' }}">{{ $item->point }}/100</span>@else<span
                                     class="badge badge-secondary">Menunggu</span>@endif</td>
                             <td>
-                                <div class="flex justify-end"><a
+                                <div class="flex justify-center"><a
                                         href="{{ route('dashboard.assignments.show', [$course->slug, $homework->slug, $item->id]) }}"
                                         class="btn btn-sm btn-ghost text-secondary-500">Lihat & Nilai</a></div>
                             </td>

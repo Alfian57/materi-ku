@@ -13,7 +13,7 @@
                     <tr>
                         <th>Siswa</th>
                         <th>Isi Ulasan</th>
-                        <th class="text-right">Aksi</th>
+                        <th class="!text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,7 +31,7 @@
                             </td>
                             <td class="text-[rgb(var(--color-text-muted))]">{{ $item->content }}</td>
                             <td>
-                                <div class="flex justify-end">
+                                <div class="flex justify-center">
                                     <form action="{{ route('dashboard.reviews.unblock', $item->id) }}" method="POST"
                                         class="inline" x-data
                                         @submit.prevent="Swal.fire({title:'Buka Blokir Ulasan?',icon:'question',showCancelButton:true,confirmButtonText:'Ya, buka blokir', cancelButtonText:'Batal'}).then((r)=>{if(r.isConfirmed)$el.submit()})">

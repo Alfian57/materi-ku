@@ -3,13 +3,20 @@
         <!-- Left: Form Section -->
         <div class="flex-1 flex items-center justify-center p-6 lg:p-12">
             <div class="w-full max-w-md">
+                <!-- Back to Home -->
+                <a href="{{ route('landing') }}"
+                    class="inline-flex items-center gap-2 text-sm text-[rgb(var(--color-text-muted))] hover:text-primary-600 transition-colors mb-8 group">
+                    <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    Kembali ke Beranda
+                </a>
+
                 <!-- Logo -->
-                <div class="flex items-center gap-3 mb-8">
-                    <div
-                        class="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-glow overflow-hidden">
-                        <img src="{{ asset('logo/logo.svg') }}" alt="Materi-Ku Logo" class="w-full h-full object-cover">
-                    </div>
-                    <span class="text-2xl font-bold text-gradient">Materi-Ku</span>
+                <div class="mb-8">
+                    <x-shared.logo size="lg" />
                 </div>
 
                 {{ $slot }}

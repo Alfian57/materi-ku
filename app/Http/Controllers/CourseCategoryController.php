@@ -11,7 +11,7 @@ class CourseCategoryController extends Controller
     {
         return view('dashboard.pages.course-category.index', [
             'title' => 'Manajemen Kategori Kursus',
-            'courseCategories' => CourseCategory::latest()->get(),
+            'courseCategories' => CourseCategory::withCount('courses')->latest()->get(),
         ]);
     }
 

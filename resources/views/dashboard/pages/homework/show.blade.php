@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="prose prose-sm dark:prose-invert max-w-none mb-6">
-                <p class="whitespace-pre-wrap">{{ $homework->content }}</p>
+                {!! $homework->content !!}
             </div>
             <div class="flex gap-3">
                 <a href="{{ route('dashboard.homeworks.edit', [$course->slug, $homework->slug]) }}"

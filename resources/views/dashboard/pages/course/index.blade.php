@@ -19,7 +19,7 @@
                         <th>Thumbnail</th>
                         <th>Kategori</th>
                         <th>Deskripsi</th>
-                        <th class="text-right">Aksi</th>
+                        <th class="!text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,7 +38,7 @@
                                 {{ Str::limit($item->description, 50) }}
                             </td>
                             <td>
-                                <div class="flex items-center justify-end gap-1">
+                                <div class="flex items-center justify-center gap-1">
                                     <a href="{{ route('dashboard.courses.show', $item->slug) }}"
                                         class="btn btn-sm btn-ghost text-secondary-500 hover:bg-secondary-50 dark:hover:bg-secondary-900/20"
                                         title="View">

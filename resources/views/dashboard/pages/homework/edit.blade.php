@@ -20,10 +20,10 @@
                         class="form-input @error('title') is-invalid @enderror"
                         placeholder="Masukkan judul tugas...">@error('title')<p class="form-error">{{ $message }}</p>
                         @enderror</div>
-                <div><label for="content" class="form-label">Instruksi</label><textarea id="content" name="content"
-                        rows="6" class="form-input @error('content') is-invalid @enderror"
-                        placeholder="Masukkan instruksi tugas...">{{ old('content', $homework->content) }}</textarea>@error('content')
-                        <p class="form-error">{{ $message }}</p>@enderror
+                <div><label for="content" class="form-label">Instruksi</label>
+                    <x-wysiwyg-editor name="content" :value="old('content', $homework->content)"
+                        placeholder="Masukkan instruksi tugas..." />
+                    @error('content')<p class="form-error">{{ $message }}</p>@enderror
                 </div>
                 <div class="flex items-center justify-end gap-3 pt-4 border-t border-[rgb(var(--color-border))]">
                     <a href="{{ route('dashboard.homeworks.index', $course->slug) }}" class="btn-ghost">Batal</a>

@@ -17,14 +17,12 @@ class ProfileController extends Controller
     public function updateProfile(Request $request)
     {
         $request->validate([
-            'email' => 'required|email|max:100',
+            'email' => 'required|email|max:100|unique:accounts,email,' . $request->user()->id,
         ]);
 
         $request->user()->update($request->only('email'));
 
-        toast('Profil berhasil diperbarui', 'success');
-
-        return back();
+        return back()->with('success', 'Profil berhasil diperbarui');
     }
 
     public function updateProfilePic(Request $request)
@@ -33,36 +31,35 @@ class ProfileController extends Controller
             'profile_picture' => 'required|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
+        // Delete old profile picture if exists
+        if ($request->user()->profile_picture) {
+            \Illuminate\Support\Facades\Storage::disk('public')->delete($request->user()->profile_picture);
+        }
+
         $profilePic = $request->file('profile_picture')->store('images/profile-pic', ['disk' => 'public']);
 
         $request->user()->update([
             'profile_picture' => $profilePic,
         ]);
 
-        toast('Foto profil berhasil diperbarui', 'success');
-
-        return back();
+        return back()->with('success', 'Foto profil berhasil diperbarui');
     }
 
     public function updatePassword(Request $request)
     {
         $request->validate([
             'current_password' => 'required',
-            'new_password' => 'required|confirmed|min:8',
+            'new_password' => ['required', 'confirmed', \Illuminate\Validation\Rules\Password::min(8)->letters()->numbers()],
         ]);
 
         if (!Hash::check($request->current_password, $request->user()->password)) {
-            toast('Kata sandi saat ini salah', 'error');
-
-            return back();
+            return back()->with('error', 'Kata sandi saat ini salah');
         }
 
         $request->user()->update([
             'password' => $request->new_password,
         ]);
 
-        toast('Kata sandi berhasil diperbarui', 'success');
-
-        return back();
+        return back()->with('success', 'Kata sandi berhasil diperbarui');
     }
 }

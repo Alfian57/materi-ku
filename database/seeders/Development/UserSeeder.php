@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
 
         // Students with realistic Indonesian names
         $students = [
-            ['name' => 'Rina Kartika', 'address' => 'Jl. Melati No. 10, Jakarta Timur', 'point' => 85, 'level' => 3],
+            ['name' => 'Alfian Gading', 'address' => 'Jl. Melati No. 10, Jakarta Timur', 'point' => 85, 'level' => 3],
             ['name' => 'Dimas Pratama', 'address' => 'Jl. Anggrek No. 25, Depok', 'point' => 120, 'level' => 5],
             ['name' => 'Anisa Putri', 'address' => 'Jl. Mawar No. 8, Tangerang', 'point' => 45, 'level' => 2],
             ['name' => 'Rizky Ramadhan', 'address' => 'Jl. Kenanga No. 15, Bekasi', 'point' => 200, 'level' => 7],

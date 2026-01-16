@@ -31,7 +31,7 @@
                 <div class="card">
                     <h2 class="font-bold text-lg mb-4">Konten Kursus</h2>
                     <div class="prose prose-sm dark:prose-invert max-w-none">
-                        {!! nl2br(e($course->content)) !!}
+                        {!! $course->content !!}
                     </div>
                 </div>
             </div>

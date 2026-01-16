@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\HasAccountable;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    use HasAccountable;
+
     public function index()
     {
         return view('dashboard.pages.admin.index', [
@@ -30,12 +33,13 @@ class AdminController extends Controller
             'password' => 'required|min:8|confirmed',
         ]);
 
-        $admin = Admin::create($request->only('name'));
-        $admin->account()->create($request->only('email', 'password'));
-
-        toast('Admin berhasil ditambahkan!', 'success');
-
-        return redirect()->route('dashboard.admins.index');
+        return $this->storeAccountable(
+            $request,
+            Admin::class,
+            ['name'],
+            'Admin berhasil ditambahkan!',
+            'dashboard.admins.index'
+        );
     }
 
     public function edit(Admin $admin)
@@ -54,25 +58,26 @@ class AdminController extends Controller
             'password' => 'nullable|min:8|confirmed',
         ]);
 
-        $admin->update($request->only('name'));
-        $admin->account->update($request->only('email'));
-
-        if ($request->filled('password')) {
-            $admin->account->update(['password' => $request->input('password')]);
-        }
-
-        toast('Admin berhasil diperbarui!', 'success');
-
-        return redirect()->route('dashboard.admins.index');
+        return $this->updateAccountable(
+            $request,
+            $admin,
+            ['name'],
+            'Admin berhasil diperbarui!',
+            'dashboard.admins.index'
+        );
     }
 
     public function destroy(Admin $admin)
     {
-        $admin->account->delete();
-        $admin->delete();
+        if ($admin->account->id === auth()->id()) {
+            toast('Anda tidak dapat menghapus akun sendiri!', 'error');
+            return redirect()->back();
+        }
 
-        toast('Admin berhasil dihapus!', 'success');
-
-        return redirect()->route('dashboard.admins.index');
+        return $this->destroyAccountable(
+            $admin,
+            'Admin berhasil dihapus!',
+            'dashboard.admins.index'
+        );
     }
 }

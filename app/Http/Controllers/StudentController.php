@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreStudentRequest;
+use App\Http\Requests\UpdateStudentRequest;
+use App\Http\Traits\HasAccountable;
 use App\Models\Student;
-use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
+    use HasAccountable;
+
     public function index()
     {
         return view('dashboard.pages.student.index', [
@@ -22,21 +26,15 @@ class StudentController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreStudentRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:100|unique:accounts,email',
-            'password' => 'required|min:8|confirmed',
-            'address' => 'required|string',
-        ]);
-
-        $student = Student::create($request->only('name', 'address', 'point'));
-        $student->account()->create($request->only('email', 'password'));
-
-        toast('Siswa berhasil ditambahkan!', 'success');
-
-        return redirect()->route('dashboard.students.index');
+        return $this->storeAccountable(
+            $request,
+            Student::class,
+            ['name', 'address', 'point'],
+            'Siswa berhasil ditambahkan!',
+            'dashboard.students.index'
+        );
     }
 
     public function edit(Student $student)
@@ -47,34 +45,23 @@ class StudentController extends Controller
         ]);
     }
 
-    public function update(Request $request, Student $student)
+    public function update(UpdateStudentRequest $request, Student $student)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:100|unique:accounts,email,' . $student->account->id,
-            'password' => 'nullable|min:8|confirmed',
-            'address' => 'required|string',
-        ]);
-
-        $student->update($request->only('name', 'address', 'point'));
-        $student->account->update($request->only('email'));
-
-        if ($request->filled('password')) {
-            $student->account->update(['password' => $request->input('password')]);
-        }
-
-        toast('Siswa berhasil diperbarui!', 'success');
-
-        return redirect()->route('dashboard.students.index');
+        return $this->updateAccountable(
+            $request,
+            $student,
+            ['name', 'address', 'point'],
+            'Siswa berhasil diperbarui!',
+            'dashboard.students.index'
+        );
     }
 
     public function destroy(Student $student)
     {
-        $student->account->delete();
-        $student->delete();
-
-        toast('Siswa berhasil dihapus!', 'success');
-
-        return redirect()->route('dashboard.students.index');
+        return $this->destroyAccountable(
+            $student,
+            'Siswa berhasil dihapus!',
+            'dashboard.students.index'
+        );
     }
 }

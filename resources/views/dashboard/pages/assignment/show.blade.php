@@ -61,7 +61,7 @@
                 <div>
                     <label for="point" class="form-label">Nilai (0-100)</label>
                     <input type="number" id="point" name="point" min="0" max="100"
-                        value="{{ old('point', $assignment->score) }}"
+                        value="{{ old('point', $assignment->point) }}"
                         class="form-input @error('point') is-invalid @enderror" placeholder="Masukkan nilai...">
                     @error('point')<p class="form-error">{{ $message }}</p>@enderror
                 </div>

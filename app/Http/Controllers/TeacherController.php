@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\HasAccountable;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
+    use HasAccountable;
+
     public function index()
     {
         return view('dashboard.pages.teacher.index', [
@@ -32,12 +35,13 @@ class TeacherController extends Controller
             'address' => 'required|string',
         ]);
 
-        $teacher = Teacher::create($request->only('name', 'nip', 'address'));
-        $teacher->account()->create($request->only('email', 'password'));
-
-        toast('Pengajar berhasil ditambahkan!', 'success');
-
-        return redirect()->route('dashboard.teachers.index');
+        return $this->storeAccountable(
+            $request,
+            Teacher::class,
+            ['name', 'nip', 'address'],
+            'Pengajar berhasil ditambahkan!',
+            'dashboard.teachers.index'
+        );
     }
 
     public function edit(Teacher $teacher)
@@ -58,25 +62,21 @@ class TeacherController extends Controller
             'address' => 'required|string',
         ]);
 
-        $teacher->update($request->only('name', 'nip', 'address'));
-        $teacher->account()->update($request->only('email'));
-
-        if ($request->filled('password')) {
-            $teacher->account->update(['password' => $request->input('password')]);
-        }
-
-        toast('Pengajar berhasil diperbarui!', 'success');
-
-        return redirect()->route('dashboard.teachers.index');
+        return $this->updateAccountable(
+            $request,
+            $teacher,
+            ['name', 'nip', 'address'],
+            'Pengajar berhasil diperbarui!',
+            'dashboard.teachers.index'
+        );
     }
 
     public function destroy(Teacher $teacher)
     {
-        $teacher->account->delete();
-        $teacher->delete();
-
-        toast('Pengajar berhasil dihapus!', 'success');
-
-        return redirect()->route('dashboard.teachers.index');
+        return $this->destroyAccountable(
+            $teacher,
+            'Pengajar berhasil dihapus!',
+            'dashboard.teachers.index'
+        );
     }
 }

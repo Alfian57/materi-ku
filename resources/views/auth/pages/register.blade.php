@@ -7,68 +7,19 @@
         <form action="{{ route('dashboard.register.store') }}" method="POST" class="space-y-4">
             @csrf
 
-            <!-- Name -->
-            <div>
-                <label for="name" class="form-label">Nama Lengkap</label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                        <svg class="w-5 h-5 text-[rgb(var(--color-text-muted))]" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                    </div>
-                    <input type="text" id="name" name="name" value="{{ old('name') }}"
-                        class="form-input pl-12 @error('name') is-invalid @enderror"
-                        placeholder="Masukkan nama lengkap...">
-                </div>
-                @error('name')
-                    <p class="form-error">{{ $message }}</p>
-                @enderror
-            </div>
+            {{-- Name --}}
+            <x-ui.input label="Nama Lengkap" name="name" placeholder="Masukkan nama lengkap..." icon="user"
+                value="{{ old('name') }}" />
 
-            <!-- Email -->
-            <div>
-                <label for="email" class="form-label">Alamat Email</label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                        <svg class="w-5 h-5 text-[rgb(var(--color-text-muted))]" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
-                        </svg>
-                    </div>
-                    <input type="email" id="email" name="email" value="{{ old('email') }}"
-                        class="form-input pl-12 @error('email') is-invalid @enderror" placeholder="Masukkan email...">
-                </div>
-                @error('email')
-                    <p class="form-error">{{ $message }}</p>
-                @enderror
-            </div>
+            {{-- Email --}}
+            <x-ui.input label="Alamat Email" name="email" type="email" placeholder="Masukkan email..." icon="mail"
+                value="{{ old('email') }}" />
 
-            <!-- Address -->
-            <div>
-                <label for="address" class="form-label">Alamat</label>
-                <div class="relative">
-                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                        <svg class="w-5 h-5 text-[rgb(var(--color-text-muted))]" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                    </div>
-                    <input type="text" id="address" name="address" value="{{ old('address') }}"
-                        class="form-input pl-12 @error('address') is-invalid @enderror"
-                        placeholder="Masukkan alamat...">
-                </div>
-                @error('address')
-                    <p class="form-error">{{ $message }}</p>
-                @enderror
-            </div>
+            {{-- Address --}}
+            <x-ui.input label="Alamat" name="address" placeholder="Masukkan alamat..." icon="location-marker"
+                value="{{ old('address') }}" />
 
-            <!-- Password -->
+            {{-- Password --}}
             <div>
                 <label for="password" class="form-label">Kata Sandi</label>
                 <div class="relative" x-data="{ showPassword: false }">
@@ -105,7 +56,7 @@
                 @enderror
             </div>
 
-            <!-- Confirm Password -->
+            {{-- Confirm Password --}}
             <div>
                 <label for="password_confirmation" class="form-label">Konfirmasi Kata Sandi</label>
                 <div class="relative" x-data="{ showPassword: false }">
@@ -139,14 +90,16 @@
                 </div>
             </div>
 
-            <!-- Submit Button -->
-            <button type="submit" class="btn-primary w-full mt-2">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                </svg>
+            {{-- Submit --}}
+            <x-ui.button type="submit" class="w-full justify-center mt-2">
+                <x-slot:icon>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                    </svg>
+                </x-slot:icon>
                 Buat Akun
-            </button>
+            </x-ui.button>
         </form>
 
         <!-- Login Link -->

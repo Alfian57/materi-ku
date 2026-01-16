@@ -19,7 +19,7 @@
                         <th>Pengajar</th>
                         <th>Email</th>
                         <th>Alamat</th>
-                        <th class="text-right">Aksi</th>
+                        <th class="!text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,7 +45,7 @@
                             <td class="text-[rgb(var(--color-text-muted))]">{{ $item->account->email }}</td>
                             <td class="text-[rgb(var(--color-text-muted))] max-w-xs truncate">{{ $item->address }}</td>
                             <td>
-                                <div class="flex items-center justify-end gap-2">
+                                <div class="flex items-center justify-center gap-1">
                                     <a href="{{ route('dashboard.teachers.edit', $item->nip) }}"
                                         class="btn btn-sm btn-ghost text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-900/20">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
