@@ -10,6 +10,12 @@ export default {
         './resources/**/*.js',
         './resources/**/*.vue',
     ],
+    safelist: [
+        {
+            pattern: /(from|to|border|shadow)-(emerald|amber|rose)-(50|100|500|600)/,
+            variants: ['hover', 'group-hover', 'dark', 'dark:hover'],
+        },
+    ],
     theme: {
         extend: {
             fontFamily: {
